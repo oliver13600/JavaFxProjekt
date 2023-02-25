@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.control.TableColumn?>
+<VBox spacing="20.0" alignment="CENTER" xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.basiclayour.HelloController">
+    <padding>
+    </padding>
+
+    <MenuBar>
+        <Menu text="File">
+        </Menu>
+        <Menu text="Edit">
+        </Menu>
+        <Menu text="Options">
+        </Menu>
+        <Menu text="Help">
+        </Menu>
+    </MenuBar>
+
+    <TextField fx:id="searchBar" promptText="Search..."></TextField>
+
+    <HBox alignment="CENTER">
+        <TableView fx:id="Table1">
+        </TableView>
+        <VBox>
+            <ImageView fitHeight="200.0" fitWidth="500.0"><Image url="@test.jpg"/></ImageView>
+            <TableView fx:id="Table2">
+                <TableColumn></TableColumn>
+                <TableColumn></TableColumn>
+                <TableColumn></TableColumn>
+            </TableView>
+        </VBox>
+    </HBox>
+</VBox>
