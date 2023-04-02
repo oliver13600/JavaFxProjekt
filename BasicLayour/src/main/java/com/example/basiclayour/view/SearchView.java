@@ -1,4 +1,8 @@
 package com.example.basiclayour.view;
 
+import javafx.fxml.FXML;
+
 public class SearchView {
+
+
 }

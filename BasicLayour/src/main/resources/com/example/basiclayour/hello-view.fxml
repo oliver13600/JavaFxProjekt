@@ -28,7 +28,6 @@
         </Menu>
     </MenuBar>
 
-    <TextField fx:id="searchBar" promptText="Search..."></TextField>
 
     <HBox alignment="CENTER">
         <TableView fx:id="Table1">
