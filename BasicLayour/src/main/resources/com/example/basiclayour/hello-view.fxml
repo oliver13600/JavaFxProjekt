@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.TableView?>
@@ -13,32 +11,67 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.layout.Pane?>
 <VBox spacing="20.0" alignment="CENTER" xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.basiclayour.HelloController">
-    <padding>
-    </padding>
 
-    <MenuBar>
-        <Menu text="File">
-        </Menu>
-        <Menu text="Edit">
-        </Menu>
-        <Menu text="Options">
-        </Menu>
-        <Menu text="Help">
-        </Menu>
-    </MenuBar>
+    <HBox alignment="CENTER"> <!--HBox mit MenuBar-->
+        <MenuBar minWidth="800">
+            <Menu text="File"></Menu>
+            <Menu text="Edit"></Menu>
+            <Menu text="Options"></Menu>
+            <Menu></Menu>
+            <Menu></Menu>
+            <Menu text="Help"></Menu>
+        </MenuBar>
+    </HBox>
+    <!--SearchBar-->
+    <TextField fx:id="searchBar" promptText="Search..."></TextField>
 
+    <HBox alignment="CENTER"> <!--Alles in einer HBOX-->
+        <VBox> <!--VBox für Touren-->
+            <HBox> <!--Tour-Buttons-->
+                <Label text="Tours"></Label>
+                <Pane HBox.hgrow="ALWAYS"></Pane>
+                <Button text="+"></Button>
+                <Button text="-"></Button>
+                <Button text="..."></Button>
+            </HBox>
 
-    <HBox alignment="CENTER">
-        <TableView fx:id="Table1">
-        </TableView>
-        <VBox>
-            <ImageView fitHeight="200.0" fitWidth="500.0"><Image url="@test.jpg"/></ImageView>
-            <TableView fx:id="Table2">
-                <TableColumn></TableColumn>
-                <TableColumn></TableColumn>
-                <TableColumn></TableColumn>
-            </TableView>
+            <Rectangle fill="blue" width="300" height="5"></Rectangle>
+
+            <ListView fx:id="Table1"></ListView>
         </VBox>
+
+        <VBox> <!--VBox für TourDetails-->
+            <HBox> <!--TourDetails-Buttons-->
+                <Button text="General"></Button>
+                <Button text="Route"></Button>
+                <Button text="Misc"></Button>
+            </HBox>
+
+            <Rectangle fill="blue" width="500" height="5"></Rectangle>
+
+            <ImageView fitHeight="200.0" fitWidth="500.0"><Image url="@test.jpg"/></ImageView>
+
+            <HBox> <!--TourLogs-Buttons-->
+                <Label text="Tour Logs"></Label>
+                <Pane HBox.hgrow="ALWAYS"></Pane>
+                <Button text="+"/>
+                <Button text="-"/>
+                <Button text="..."/>
+            </HBox>
+
+            <Rectangle fill="blue" width="500" height="5"></Rectangle>
+
+            <TableView fx:id="Table2"> <!--TourLog-Tabelle-->
+                    <columns>
+                        <TableColumn text="Date"></TableColumn>
+                        <TableColumn text="Duration"></TableColumn>
+                        <TableColumn text="Distance"></TableColumn>
+                    </columns>
+                </TableView>
+         </VBox>
     </HBox>
 </VBox>
