@@ -5,9 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9c5d8d7c-d072-431b-8f8b-b265ba719c20" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/basiclayour/gui_de.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/basiclayour/gui_en.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/example/basiclayour/main-view.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/basiclayour/hello-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/basiclayour/hello-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/basiclayour/FXMLDependencyInjector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/basiclayour/FXMLDependencyInjector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/basiclayour/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/basiclayour/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/basiclayour/view/MainView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/basiclayour/view/MainView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/basiclayour/view/SearchView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/basiclayour/view/SearchView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/basiclayour/view/ViewFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/basiclayour/view/ViewFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/basiclayour/viewmodel/SearchViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/basiclayour/viewmodel/SearchViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/basiclayour/search-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/basiclayour/search-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,22 +51,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/lolo7/IdeaProjects/JavaFxProjekt/BasicLayour",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Oliver/Swen1/JavaFxProjekt/BasicLayour/src/main/resources&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Oliver\Swen1\JavaFxProjekt\BasicLayour\src\main\resources" />
+      <recent name="C:\Users\Oliver\Swen1\JavaFxProjekt\BasicLayour\src\main\resources\com\example\basiclayour" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Oliver\Swen1\JavaFxProjekt\BasicLayour\src\main\resources\com\example\basiclayour" />
+      <recent name="C:\Users\Oliver\Swen1\JavaFxProjekt\BasicLayour\src" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.basiclayour.HelloApplication" />
@@ -101,6 +120,11 @@
       <workItem from="1679984906940" duration="466000" />
       <workItem from="1679986006714" duration="1533000" />
       <workItem from="1680853242366" duration="7958000" />
+      <workItem from="1680871852677" duration="257000" />
+      <workItem from="1682103961405" duration="1032000" />
+      <workItem from="1682278682734" duration="3022000" />
+      <workItem from="1682286485279" duration="228000" />
+      <workItem from="1682319685260" duration="2092000" />
     </task>
     <servers />
   </component>

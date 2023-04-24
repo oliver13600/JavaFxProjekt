@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+
 public class FXMLDependencyInjector {
 
     public static Parent load(String location, Locale locale) throws IOException {
@@ -18,8 +19,8 @@ public class FXMLDependencyInjector {
 
     public static FXMLLoader getLoader(String location, Locale locale) {
         return new FXMLLoader(
-                FXMLDependencyInjector.class.getResource("/at/technikum/mvvm/" + location),
-                ResourceBundle.getBundle("at.technikum.mvvm.gui", locale),
+                FXMLDependencyInjector.class.getResource("/com/example/basiclayour/" + location),
+                ResourceBundle.getBundle("com.example.basiclayour.gui", locale),
                 new JavaFXBuilderFactory(),
                 viewClass -> ViewFactory.getInstance().create(viewClass)
         );
