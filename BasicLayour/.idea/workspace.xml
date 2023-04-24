@@ -4,25 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9c5d8d7c-d072-431b-8f8b-b265ba719c20" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/basiclayour/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/basiclayour/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/basiclayour/view/SearchView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/basiclayour/view/SearchView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swen2-mvvm-main/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../swen2-mvvm-main/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swen2-mvvm-main/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../swen2-mvvm-main/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swen2-mvvm-main/src/main/java/at/technikum/mvvm/data/HibernateSessionFactory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swen2-mvvm-main/src/main/java/at/technikum/mvvm/model/Tour.java" beforeDir="false" afterPath="$PROJECT_DIR$/../swen2-mvvm-main/src/main/java/at/technikum/mvvm/model/Tour.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swen2-mvvm-main/src/main/java/at/technikum/mvvm/model/Word.java" beforeDir="false" afterPath="$PROJECT_DIR$/../swen2-mvvm-main/src/main/java/at/technikum/mvvm/model/Word.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swen2-mvvm-main/src/main/java/at/technikum/mvvm/repository/WordRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../swen2-mvvm-main/src/main/java/at/technikum/mvvm/repository/WordRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swen2-mvvm-main/src/main/java/at/technikum/mvvm/service/WordService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../swen2-mvvm-main/src/main/java/at/technikum/mvvm/service/WordService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swen2-mvvm-main/src/main/java/at/technikum/mvvm/view/ViewFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/../swen2-mvvm-main/src/main/java/at/technikum/mvvm/view/ViewFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swen2-mvvm-main/src/main/java/at/technikum/mvvm/viewmodel/ConnectorViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../swen2-mvvm-main/src/main/java/at/technikum/mvvm/viewmodel/ConnectorViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swen2-mvvm-main/src/main/java/at/technikum/mvvm/viewmodel/WordListViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../swen2-mvvm-main/src/main/java/at/technikum/mvvm/viewmodel/WordListViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swen2-mvvm-main/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../swen2-mvvm-main/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swen2-mvvm-main/src/main/resources/hibernate.cfg.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../swen2-mvvm-main/src/main/resources/hibernate.cfg.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../swen2-mvvm-main/src/test/java/at/technikum/mvvm/viewmodel/WordListViewModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../swen2-mvvm-main/src/test/java/at/technikum/mvvm/viewmodel/WordListViewModelTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="9c5d8d7c-d072-431b-8f8b-b265ba719c20" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -61,7 +43,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/SS2023/SWEN2/JavaFxProjekt/JavaFxProjekt/swen2-mvvm-main",
+    "last_opened_file_path": "D:/SS2023/SWEN2/JavaFxProjekt/JavaFxProjekt/BasicLayour",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -131,6 +113,7 @@
       <workItem from="1682286485279" duration="228000" />
       <workItem from="1682319685260" duration="2092000" />
       <workItem from="1682339827132" duration="2978000" />
+      <workItem from="1682357488296" duration="30000" />
     </task>
     <servers />
   </component>
