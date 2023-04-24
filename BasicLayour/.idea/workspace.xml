@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9c5d8d7c-d072-431b-8f8b-b265ba719c20" name="Changes" comment="" />
+    <list default="true" id="9c5d8d7c-d072-431b-8f8b-b265ba719c20" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/basiclayour/view/AddTourView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/basiclayour/viewmodel/AddTourViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/example/basiclayour/main-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/example/basiclayour/main-view.fxml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -43,7 +48,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/SS2023/SWEN2/JavaFxProjekt/JavaFxProjekt/BasicLayour",
+    "last_opened_file_path": "C:/Dev/SS_2023/swen2/JavaFxProjekt/BasicLayour",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -51,6 +56,7 @@
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "advanced.settings",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -114,6 +120,7 @@
       <workItem from="1682319685260" duration="2092000" />
       <workItem from="1682339827132" duration="2978000" />
       <workItem from="1682357488296" duration="30000" />
+      <workItem from="1682357853341" duration="4569000" />
     </task>
     <servers />
   </component>

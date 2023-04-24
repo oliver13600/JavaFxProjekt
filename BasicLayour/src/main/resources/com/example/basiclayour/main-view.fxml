@@ -6,10 +6,73 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <VBox xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.basiclayour.view.MainView">
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.basiclayour.view.MainView">
+
+    <HBox alignment="CENTER"> <!--HBox mit MenuBar-->
+        <MenuBar minWidth="800">
+            <Menu text="File"></Menu>
+            <Menu text="Edit"></Menu>
+            <Menu text="Options"></Menu>
+            <Menu></Menu>
+            <Menu></Menu>
+            <Menu text="Help"></Menu>
+        </MenuBar>
+    </HBox>
 
     <fx:include fx:id="search" source="search-view.fxml"/>
 
+    <HBox alignment="CENTER"> <!--Alles in einer HBOX-->
+        <VBox> <!--VBox für Touren-->
+            <HBox> <!--Tour-Buttons-->
+                <Label text="Tours"></Label>
+                <Pane HBox.hgrow="ALWAYS"></Pane>
+                <Button text="+"></Button>
+                <Button text="-"></Button>
+                <Button text="..."></Button>
+            </HBox>
+
+            <Rectangle fill="blue" width="300" height="5"></Rectangle>
+
+            <ListView fx:id="Table1"></ListView>
+        </VBox>
+
+        <VBox> <!--VBox für TourDetails-->
+            <HBox> <!--TourDetails-Buttons-->
+                <Button text="General"></Button>
+                <Button text="Route"></Button>
+                <Button text="Misc"></Button>
+            </HBox>
+
+            <Rectangle fill="blue" width="500" height="5"></Rectangle>
+
+            <ImageView fitHeight="200.0" fitWidth="500.0"><Image url="@test.jpg"/></ImageView>
+
+            <HBox> <!--TourLogs-Buttons-->
+                <Label text="Tour Logs"></Label>
+                <Pane HBox.hgrow="ALWAYS"></Pane>
+                <Button text="+"/>
+                <Button text="-"/>
+                <Button text="..."/>
+            </HBox>
+
+            <Rectangle fill="blue" width="500" height="5"></Rectangle>
+
+            <TableView fx:id="Table2"> <!--TourLog-Tabelle-->
+                <columns>
+                    <TableColumn text="Date"></TableColumn>
+                    <TableColumn text="Duration"></TableColumn>
+                    <TableColumn text="Distance"></TableColumn>
+                </columns>
+            </TableView>
+        </VBox>
+    </HBox>
+
 </VBox>
+
+
+
