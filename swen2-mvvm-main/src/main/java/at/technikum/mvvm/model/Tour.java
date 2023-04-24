@@ -5,5 +5,4 @@ public class Tour {
     String tourDescirption;
     String from;
     String to;
-    
 }

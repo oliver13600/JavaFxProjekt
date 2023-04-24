@@ -20,7 +20,7 @@ public class WordListViewModel {
         this.eventAggregator = eventAggregator;
         this.wordService = wordService;
 
-        words.addAll(wordService.findAll());
+
 
         eventAggregator.addSubscriber(
                 Event.NEW_WORD,
@@ -30,7 +30,6 @@ public class WordListViewModel {
 
     private void onNewWord() {
         words.clear();
-        words.addAll(wordService.findAll());
     }
 
     public ObservableList<String> getWords() {

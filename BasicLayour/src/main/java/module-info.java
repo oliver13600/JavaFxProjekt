@@ -5,5 +5,7 @@ module com.example.basiclayour {
 
 
     opens com.example.basiclayour to javafx.fxml;
+    opens com.example.basiclayour.view to javafx.fxml;
+    opens com.example.basiclayour.viewmodel to javafx.fxml;
     exports com.example.basiclayour;
 }

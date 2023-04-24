@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="wordapp@localhost" uuid="25d27ecf-a7aa-4b7e-9bd4-e64af9009344">
+    <data-source source="LOCAL" name="swen2@localhost" uuid="25d27ecf-a7aa-4b7e-9bd4-e64af9009344">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/wordapp</jdbc-url>
+      <jdbc-url>jdbc:postgresql://localhost:5432/swen2</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="hibernate.cfg.xml/Hibernate" uuid="38c676d9-c8d7-4635-aa4c-4d41616a4ce9">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>Hibernate
+
+D:/SS2023/SWEN2/JavaFxProjekt/JavaFxProjekt/swen2-mvvm-main/src/main/resources/hibernate.cfg.xml</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/swen2</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

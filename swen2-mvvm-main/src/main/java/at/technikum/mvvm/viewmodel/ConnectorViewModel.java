@@ -19,7 +19,6 @@ public class ConnectorViewModel {
     public void connect() {
         String word = string1.get() + " " + string2.get();
         wordService.save(word);
-
         output.set(word);
 
         string1.set("");

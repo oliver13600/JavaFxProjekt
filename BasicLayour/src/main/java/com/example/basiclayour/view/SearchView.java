@@ -6,7 +6,7 @@ import javafx.scene.control.TextField;
 
 public class SearchView {
     @FXML
-    private TextField textField;
+    private TextField searchBar;
 
     private final SearchViewModel searchViewModel;
 
@@ -16,6 +16,6 @@ public class SearchView {
 
     @FXML
     void initialize() {
-        textField.textProperty().bindBidirectional(searchViewModel.string1Property());
+        searchBar.textProperty().bindBidirectional(searchViewModel.string1Property());
     }
 }

@@ -18,10 +18,5 @@ public class WordService {
         wordRepository.save(new Word(word));
     }
 
-    public List<String> findAll() {
-        return wordRepository.findAll()
-                .stream()
-                .map(Word::getValue)
-                .collect(Collectors.toList());
-    }
+
 }
