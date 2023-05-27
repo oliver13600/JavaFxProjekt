@@ -41,6 +41,8 @@
             <ListView fx:id="Table1"></ListView>
         </VBox>
 
+        <fx:include fx:id="addTour" source="addTour-view.fxml"/>
+
         <VBox> <!--VBox für TourDetails-->
             <HBox> <!--TourDetails-Buttons-->
                 <Button text="General"></Button>

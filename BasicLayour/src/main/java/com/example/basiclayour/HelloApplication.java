@@ -15,8 +15,6 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         Parent root = FXMLDependencyInjector.load("main-view.fxml", Locale.ENGLISH);
-        //FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        //Scene scene = new Scene(fxmlLoader.load(), 800, 500);
         Scene scene = new Scene(root, 800,500);
         stage.setTitle("Tour Planer");
         stage.setScene(scene);
