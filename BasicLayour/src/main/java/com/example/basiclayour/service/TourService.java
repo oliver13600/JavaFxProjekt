@@ -13,8 +13,36 @@ public class TourService {
         this.tourRepository = tourRepository;
     }
 
-    public void save(String tourName) {
-        tourRepository.save(new Tour(tourName));
+    public void save(String tourInfo) {
+
+        String tourInformationSplit[] = tourInfo.split(" ");
+        // From Wien to Salzburg in 02:48:26 (296.0)
+
+        String tourName = tourInformationSplit[1] + "-" + tourInformationSplit[2] + "-" + tourInformationSplit[3];
+
+        String fromStart = tourInformationSplit[1];
+        String toFinish = tourInformationSplit[3];
+
+        String tourDescription = "No Description yet";
+        String transportType = "Work in Progress";
+
+
+        String tourDistanceString = tourInformationSplit[6].replaceAll("[\\p{Ps}\\p{Pe}]"," ");
+        float tourDistance = Float.parseFloat(tourDistanceString);
+
+        String estimatedTimeString[] = tourInformationSplit[5].split(":");
+        int hours = Integer.parseInt(estimatedTimeString[0]);
+        int minutes = Integer.parseInt(estimatedTimeString[1]);
+        int seconds = Integer.parseInt(estimatedTimeString[2]);
+
+        double secondsToMinutes = (seconds / 60.0);
+
+        float estimatedTime = (hours * 60) + minutes + (float)secondsToMinutes; // in minutes
+
+        String tourInformation = tourInfo;
+
+        // tourRepository.save(new Tour(tourInformation));
+        tourRepository.save(new Tour(tourName, tourDescription, fromStart, toFinish, transportType, tourDistance, estimatedTime, tourInformation));
     }
 
     public List<String> findAll() {

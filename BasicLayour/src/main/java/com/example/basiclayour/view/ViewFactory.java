@@ -21,7 +21,7 @@ public class ViewFactory {
 
     private final TourRepository tourRepository;
 
-    //private final RouteService routeService;
+    private final RouteService routeService;
 
     private final TourService tourService;
     private final SearchViewModel searchViewModel;
@@ -35,9 +35,9 @@ public class ViewFactory {
         tourRepository = new TourRepository(sessionFactory, eventAggregator);
         tourService = new TourService(tourRepository);
 
-        //routeService = new MapQuestRouteService();
+        routeService = new MapQuestRouteService();
 
-        addTourViewModel = new AddTourViewModel(tourService);
+        addTourViewModel = new AddTourViewModel(routeService, tourService);
         searchViewModel = new SearchViewModel();
         tourListViewModel = new TourListViewModel(eventAggregator, tourService);
     }

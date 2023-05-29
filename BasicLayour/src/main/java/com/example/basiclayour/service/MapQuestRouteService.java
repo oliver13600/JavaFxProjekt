@@ -21,7 +21,7 @@ import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
 
 public class MapQuestRouteService implements RouteService{
-    private static String API_KEY = "YOUR_API_KEY"; // should be in configuration file
+    private static String API_KEY = "09SGt0Hp1Cr5oqOpHa1eph3OPgdm0Qiw"; // should be in configuration file
 
     @Override
     public Route getRoute(String from, String to) {

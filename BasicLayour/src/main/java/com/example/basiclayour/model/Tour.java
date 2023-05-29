@@ -13,10 +13,10 @@ public class Tour {
     private String name;
     @Column
     private String tourDescription;
-    //@Column
-    //private String from;
-    //@Column
-    //private String to;
+    @Column
+    private String fromStart;
+    @Column
+    private String toFinish;
     @Column
     private String transportType; //maybe change to enum
     @Column
@@ -29,11 +29,11 @@ public class Tour {
     public Tour(){
 
     }
-    public Tour(String name, String tourDescription, /*String from, String to,*/ String transportType, float tourDistance, float estimatedTime, String tourInformation) {
+    public Tour(String name, String tourDescription, String fromStart, String toFinish, String transportType, float tourDistance, float estimatedTime, String tourInformation) {
         this.name = name;
         this.tourDescription = tourDescription;
-        //this.from = from;
-        //this.to = to;
+        this.fromStart = fromStart;
+        this.toFinish = toFinish;
         this.transportType = transportType;
         this.tourDistance = tourDistance;
         this.estimatedTime = estimatedTime;
