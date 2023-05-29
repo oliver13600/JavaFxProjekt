@@ -35,6 +35,7 @@
                 <Button text="+"></Button>
                 <Button text="-"></Button>
                 <Button text="..."></Button>
+                <Button text="test"></Button>
             </HBox>
 
             <Rectangle fill="blue" width="300" height="5"></Rectangle>
