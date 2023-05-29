@@ -13,6 +13,7 @@
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.basiclayour.view.MainView">
 
+
     <HBox alignment="CENTER"> <!--HBox mit MenuBar-->
         <MenuBar minWidth="800">
             <Menu text="File"></Menu>
@@ -42,6 +43,8 @@
         </VBox>
 
         <fx:include fx:id="addTour" source="addTour-view.fxml"/>
+
+        <fx:include fx:id="tourList" source="tour-list-view.fxml"/>
 
         <VBox> <!--VBox für TourDetails-->
             <HBox> <!--TourDetails-Buttons-->
@@ -73,6 +76,8 @@
             </TableView>
         </VBox>
     </HBox>
+
+
 
 </VBox>
 

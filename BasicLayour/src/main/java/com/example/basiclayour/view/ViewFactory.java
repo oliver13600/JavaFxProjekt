@@ -4,9 +4,12 @@ package com.example.basiclayour.view;
 import com.example.basiclayour.data.HibernateSessionFactory;
 import com.example.basiclayour.event.EventAggregator;
 import com.example.basiclayour.repository.TourRepository;
+import com.example.basiclayour.service.MapQuestRouteService;
+import com.example.basiclayour.service.RouteService;
 import com.example.basiclayour.service.TourService;
 import com.example.basiclayour.viewmodel.AddTourViewModel;
 import com.example.basiclayour.viewmodel.SearchViewModel;
+import com.example.basiclayour.viewmodel.TourListViewModel;
 
 public class ViewFactory {
 
@@ -18,10 +21,12 @@ public class ViewFactory {
 
     private final TourRepository tourRepository;
 
-    private final TourService tourService;
+    //private final RouteService routeService;
 
+    private final TourService tourService;
     private final SearchViewModel searchViewModel;
     private final AddTourViewModel addTourViewModel;
+    private final TourListViewModel tourListViewModel;
 
     private ViewFactory() {
         eventAggregator = new EventAggregator();
@@ -30,8 +35,11 @@ public class ViewFactory {
         tourRepository = new TourRepository(sessionFactory, eventAggregator);
         tourService = new TourService(tourRepository);
 
+        //routeService = new MapQuestRouteService();
+
         addTourViewModel = new AddTourViewModel(tourService);
         searchViewModel = new SearchViewModel();
+        tourListViewModel = new TourListViewModel(eventAggregator, tourService);
     }
 
     public Object create(Class<?> viewClass) {
@@ -43,6 +51,9 @@ public class ViewFactory {
         }
         if(viewClass == AddTourView.class){
             return new AddTourView(addTourViewModel);
+        }
+        if(viewClass == TourListView.class){
+            return new TourListView(tourListViewModel);
         }
 
         throw new IllegalArgumentException();

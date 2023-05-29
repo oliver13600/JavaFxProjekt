@@ -1,10 +1,8 @@
 package com.example.basiclayour.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+@Entity
 public class Tour {
 
     @Id
@@ -12,30 +10,30 @@ public class Tour {
     @Column
     private Long id;
     @Column
-    String name;
+    private String name;
     @Column
-    String tourDescription;
+    private String tourDescription;
+    //@Column
+    //private String from;
+    //@Column
+    //private String to;
     @Column
-    String from;
+    private String transportType; //maybe change to enum
     @Column
-    String to;
+    private float tourDistance;
     @Column
-    String transportType; //maybe change to enum
+    private float estimatedTime;
     @Column
-    float tourDistance;
-    @Column
-    float estimatedTime;
-    @Column
-    String tourInformation;
+    private String tourInformation;
 
     public Tour(){
 
     }
-    public Tour(String name, String tourDescription, String from, String to, String transportType, float tourDistance, float estimatedTime, String tourInformation) {
+    public Tour(String name, String tourDescription, /*String from, String to,*/ String transportType, float tourDistance, float estimatedTime, String tourInformation) {
         this.name = name;
         this.tourDescription = tourDescription;
-        this.from = from;
-        this.to = to;
+        //this.from = from;
+        //this.to = to;
         this.transportType = transportType;
         this.tourDistance = tourDistance;
         this.estimatedTime = estimatedTime;
@@ -70,7 +68,7 @@ public class Tour {
         this.tourDescription = tourDescription;
     }
 
-    public String getFrom() {
+    /*public String getFrom() {
         return from;
     }
 
@@ -84,7 +82,7 @@ public class Tour {
 
     public void setTo(String to) {
         this.to = to;
-    }
+    }*/
 
     public String getTransportType() {
         return transportType;

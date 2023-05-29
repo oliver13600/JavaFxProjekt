@@ -6,5 +6,12 @@ public class MainView {
 
     @FXML
     private SearchView searchView;
+    @FXML
+    private AddTourView addTourView;
+
+    @FXML
+    private TourListView tourListView;
+
+
 
 }
