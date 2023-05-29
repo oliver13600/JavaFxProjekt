@@ -19,3 +19,4 @@ public class SearchView {
         searchBar.textProperty().bindBidirectional(searchViewModel.string1Property());
     }
 }
+

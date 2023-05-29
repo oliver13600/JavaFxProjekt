@@ -5,13 +5,6 @@ import javafx.fxml.FXML;
 public class MainView {
 
     @FXML
-    private SearchView searchView;
-    @FXML
-    private AddTourView addTourView;
-
-    @FXML
-    private TourListView tourListView;
-
-
+    private SearchView searchView;^^
 
 }
