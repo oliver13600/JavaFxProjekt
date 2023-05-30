@@ -12,6 +12,8 @@ public class TourListViewModel {
     private final EventAggregator eventAggregator;
     private final TourService tourService;
 
+    //searchService
+
     public TourListViewModel(
             EventAggregator eventAggregator,
             TourService tourService
