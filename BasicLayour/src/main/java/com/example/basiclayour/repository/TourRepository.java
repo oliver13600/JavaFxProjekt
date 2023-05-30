@@ -53,7 +53,7 @@ public class TourRepository {
             CriteriaQuery<Tour> criteria = builder.createQuery(Tour.class);
             Root<Tour> root = criteria.from(Tour.class);
             criteria.select(root);
-            criteria.where(builder.like(root.get("name"), "%" + "Wien" + "%"));
+            criteria.where(builder.like(root.get("name"), "%" + "Linz" + "%"));
 
             return session.createQuery(criteria).getResultList();
         }

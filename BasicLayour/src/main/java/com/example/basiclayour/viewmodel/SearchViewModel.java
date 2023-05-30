@@ -12,13 +12,10 @@ public class SearchViewModel {
 
     private final TourService tourService;
 
-    private final RouteService routeService;
 
     public SearchViewModel(
-            RouteService routeService,
             TourService tourService
     ) {
-        this.routeService = routeService;
         this.tourService = tourService;
 
     }
@@ -26,7 +23,7 @@ public class SearchViewModel {
     public void searchTour()
     {
         String keyword = string1.toString();
-        tourService.findToursByKeyword();
+        tourService.searchTours();
     }
 
 
