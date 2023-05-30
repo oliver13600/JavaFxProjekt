@@ -25,6 +25,14 @@ public class TourListViewModel {
                 Event.NEW_TOUR,
                 this::onNewTour
         );
+        eventAggregator.addSubscriber(
+                Event.DELETE_TOUR,
+                this::onDeleteTour
+        );
+        eventAggregator.addSubscriber(
+                Event.SEARCH_TOUR,
+                this::onSearchTour
+        );
     }
 
     private void onNewTour() {
@@ -32,7 +40,24 @@ public class TourListViewModel {
         tours.addAll(tourService.findAll());
     }
 
+    private void onDeleteTour()
+    {
+        tours.clear();
+        tours.addAll(tourService.findAll());
+    }
+
+    private void onSearchTour()
+    {
+        tours.clear();
+        tours.addAll(tourService.findToursByKeyword());
+    }
+
+
     public ObservableList<String> getTours() {
         return tours;
+    }
+
+    public void deleteTour(String keyword){
+        tourService.deleteTourByKeyword(keyword);
     }
 }

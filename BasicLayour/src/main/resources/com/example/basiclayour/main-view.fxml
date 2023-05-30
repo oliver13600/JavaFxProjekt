@@ -14,7 +14,7 @@
       fx:controller="com.example.basiclayour.view.MainView">
 
 
-    <HBox alignment="CENTER"> <!--HBox mit MenuBar-->
+    <HBox> <!--HBox mit MenuBar-->
         <MenuBar minWidth="800">
             <Menu text="File"></Menu>
             <Menu text="Edit"></Menu>
@@ -28,24 +28,12 @@
     <fx:include fx:id="search" source="search-view.fxml"/>
 
     <HBox alignment="CENTER"> <!--Alles in einer HBOX-->
-        <VBox> <!--VBox für Touren-->
-            <HBox> <!--Tour-Buttons-->
-                <Label text="Tours"></Label>
-                <Pane HBox.hgrow="ALWAYS"></Pane>
-                <Button text="+"></Button>
-                <Button text="-"></Button>
-                <Button text="..."></Button>
-                <Button text="test"></Button>
-            </HBox>
 
-            <Rectangle fill="blue" width="300" height="5"></Rectangle>
-
-            <ListView fx:id="Table1"></ListView>
-        </VBox>
+        <fx:include fx:id="tourList" source="tour-list-view.fxml"/>
 
         <fx:include fx:id="addTour" source="addTour-view.fxml"/>
 
-        <fx:include fx:id="tourList" source="tour-list-view.fxml"/>
+
 
         <VBox> <!--VBox für TourDetails-->
             <HBox> <!--TourDetails-Buttons-->
@@ -56,7 +44,7 @@
 
             <Rectangle fill="blue" width="500" height="5"></Rectangle>
 
-            <ImageView fitHeight="200.0" fitWidth="500.0"><Image url="@test.jpg"/></ImageView>
+            <ImageView fitHeight="200.0" fitWidth="500.0"><Image url="@map.jpg"/></ImageView>
 
             <HBox> <!--TourLogs-Buttons-->
                 <Label text="Tour Logs"></Label>

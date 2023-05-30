@@ -3,15 +3,7 @@
   <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.40">
     <root id="1">
       <DateStyle>dmy</DateStyle>
-      <Grants>1||-9223372036854775808|c|G
-1||10|c|G
-1||10|C|G
-1||10|T|G
-4||-9223372036854775808|c|G
-4||10|c|G
-4||10|C|G
-4||10|T|G</Grants>
-      <IntrospectionStateNumber>7364</IntrospectionStateNumber>
+      <IntrospectionStateNumber>7368</IntrospectionStateNumber>
       <ServerVersion>15.1</ServerVersion>
       <StartupTime>1685173419</StartupTime>
       <TimeZones>true ACDT
@@ -821,10 +813,8 @@ false Zulu
 13183||10|C|G
 13183||-9223372036854775808|U|G
 13183||10|U|G</Grants>
-      <IntrospectionStateNumber>7364</IntrospectionStateNumber>
+      <IntrospectionStateNumber>7368</IntrospectionStateNumber>
       <ObjectId>28759</ObjectId>
-      <Relations>sequence|table|28766|28767|1
-</Relations>
       <OwnerName>postgres</OwnerName>
     </database>
     <role id="6" parent="1" name="pg_checkpoint">
@@ -4232,82 +4222,10 @@ false Zulu
     <schema id="264" parent="5" name="public">
       <Comment>standard public schema</Comment>
       <Current>1</Current>
-      <IntrospectionStateNumber>7364</IntrospectionStateNumber>
+      <IntrospectionStateNumber>7368</IntrospectionStateNumber>
       <ObjectId>2200</ObjectId>
       <StateNumber>518</StateNumber>
       <OwnerName>pg_database_owner</OwnerName>
     </schema>
-    <sequence id="265" parent="264" name="tour_id_seq">
-      <DataType>bigint|0s</DataType>
-      <ObjectId>28766</ObjectId>
-      <StateNumber>7363</StateNumber>
-      <OwnerName>postgres</OwnerName>
-    </sequence>
-    <table id="266" parent="264" name="tour">
-      <ObjectId>28767</ObjectId>
-      <StateNumber>7363</StateNumber>
-      <AccessMethodId>2</AccessMethodId>
-      <OwnerName>postgres</OwnerName>
-    </table>
-    <column id="267" parent="266" name="id">
-      <DataType>bigint|0s</DataType>
-      <DefaultExpression>nextval(&apos;tour_id_seq&apos;::regclass)</DefaultExpression>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-      <StateNumber>7363</StateNumber>
-      <TypeId>20</TypeId>
-    </column>
-    <column id="268" parent="266" name="estimatedtime">
-      <DataType>real|0s</DataType>
-      <Position>2</Position>
-      <StateNumber>7363</StateNumber>
-      <TypeId>700</TypeId>
-    </column>
-    <column id="269" parent="266" name="name">
-      <DataType>varchar(255)|0s</DataType>
-      <Position>3</Position>
-      <StateNumber>7363</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="270" parent="266" name="tourdescription">
-      <DataType>varchar(255)|0s</DataType>
-      <Position>4</Position>
-      <StateNumber>7363</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="271" parent="266" name="tourdistance">
-      <DataType>real|0s</DataType>
-      <Position>5</Position>
-      <StateNumber>7363</StateNumber>
-      <TypeId>700</TypeId>
-    </column>
-    <column id="272" parent="266" name="tourinformation">
-      <DataType>varchar(255)|0s</DataType>
-      <Position>6</Position>
-      <StateNumber>7363</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="273" parent="266" name="transporttype">
-      <DataType>varchar(255)|0s</DataType>
-      <Position>7</Position>
-      <StateNumber>7363</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <index id="274" parent="266" name="tour_pkey">
-      <ColNames>id</ColNames>
-      <NameSurrogate>1</NameSurrogate>
-      <ObjectId>28773</ObjectId>
-      <Primary>1</Primary>
-      <StateNumber>7363</StateNumber>
-      <Unique>1</Unique>
-      <AccessMethodId>403</AccessMethodId>
-    </index>
-    <key id="275" parent="266" name="tour_pkey">
-      <NameSurrogate>1</NameSurrogate>
-      <ObjectId>28774</ObjectId>
-      <Primary>1</Primary>
-      <StateNumber>7363</StateNumber>
-      <UnderlyingIndexId>28773</UnderlyingIndexId>
-    </key>
   </database-model>
 </dataSource>

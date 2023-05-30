@@ -38,7 +38,7 @@ public class ViewFactory {
         routeService = new MapQuestRouteService();
 
         addTourViewModel = new AddTourViewModel(routeService, tourService);
-        searchViewModel = new SearchViewModel();
+        searchViewModel = new SearchViewModel(routeService, tourService);
         tourListViewModel = new TourListViewModel(eventAggregator, tourService);
     }
 

@@ -8,5 +8,7 @@
 
     <TextField fx:id="searchBar" promptText="Search..."/>
 
+    <Button onAction="#searchTour" text="%search_button"/>
+
 
 </VBox>

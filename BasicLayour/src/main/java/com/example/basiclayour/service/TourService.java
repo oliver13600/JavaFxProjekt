@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 public class TourService {
     private final TourRepository tourRepository;
 
+
     public TourService(TourRepository tourRepository) {
         this.tourRepository = tourRepository;
     }
@@ -50,5 +51,19 @@ public class TourService {
                 .stream()
                 .map(Tour::getName)
                 .collect(Collectors.toList());
+    }
+
+    public List<String> findToursByKeyword(){
+        return tourRepository.findToursByKeyword()
+                .stream()
+                .map(Tour::getName)
+                .collect(Collectors.toList());
+    }
+
+    public void searchTours(){tourRepository.searchTours();}
+
+
+    public void deleteTourByKeyword(String keyword){
+        tourRepository.deleteTourByKeyword(keyword);
     }
 }

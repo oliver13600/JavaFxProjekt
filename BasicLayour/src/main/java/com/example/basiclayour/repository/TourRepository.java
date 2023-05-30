@@ -9,7 +9,10 @@ import com.example.basiclayour.data.HibernateSessionFactory;
 import com.example.basiclayour.model.Tour;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 public class TourRepository {
     private final HibernateSessionFactory sessionFactory;
@@ -42,5 +45,37 @@ public class TourRepository {
 
             return session.createQuery(criteria).getResultList();
         }
+    }
+
+    public List<Tour> findToursByKeyword(){
+        try (Session session = sessionFactory.openSession()) {
+            CriteriaBuilder builder = session.getCriteriaBuilder();
+            CriteriaQuery<Tour> criteria = builder.createQuery(Tour.class);
+            Root<Tour> root = criteria.from(Tour.class);
+            criteria.select(root);
+            criteria.where(builder.like(root.get("name"), "%" + "Wien" + "%"));
+
+            return session.createQuery(criteria).getResultList();
+        }
+
+    }
+
+    public void searchTours(){
+        eventAggregator.publish(Event.SEARCH_TOUR);
+    }
+
+
+    public void deleteTourByKeyword(String keyword) {
+        try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
+
+            Query<Tour> query = session.createQuery("DELETE FROM Tour WHERE name = :keyword");
+            query.setParameter("keyword", keyword);
+            query.executeUpdate();
+
+            transaction.commit();
+        }
+
+        eventAggregator.publish(Event.DELETE_TOUR);
     }
 }

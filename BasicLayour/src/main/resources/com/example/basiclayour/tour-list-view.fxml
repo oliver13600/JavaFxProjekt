@@ -5,11 +5,20 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Rectangle?>
 
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.basiclayour.view.TourListView">
 
-    <ListView fx:id="tours" />
+    <HBox> <!--Tour-Buttons-->
+        <Label text="Tours"></Label>
+        <Pane HBox.hgrow="ALWAYS"></Pane>
+        <Button fx:id="deleteTour" onAction="#deleteTour" text="-"></Button>
+    </HBox>
+
+    <Rectangle fill="blue" width="300" height="5"></Rectangle>
+
+    <ListView fx:id="tours"/>
 
 </VBox>

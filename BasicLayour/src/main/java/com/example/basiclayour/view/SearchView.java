@@ -18,5 +18,9 @@ public class SearchView {
     void initialize() {
         searchBar.textProperty().bindBidirectional(searchViewModel.string1Property());
     }
+
+
+    @FXML
+    void searchTour(){searchViewModel.searchTour();}
 }
 

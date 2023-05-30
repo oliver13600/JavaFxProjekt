@@ -82,12 +82,13 @@ public class MapQuestRouteService implements RouteService{
         String uri = "https://www.mapquestapi.com/staticmap/v5/map?";
         uri += "key=" + getApiKey();
         uri += "&session=" + sessionId;
+        String filePath = "src/main/resources/com/example/basiclayour/" + filename;
 
         try {
             ReadableByteChannel readableByteChannel =
                     Channels.newChannel((new URL(uri)).openStream());
 
-            FileOutputStream fileOutputStream = new FileOutputStream(filename);
+            FileOutputStream fileOutputStream = new FileOutputStream(filePath);
             FileChannel fileChannel = fileOutputStream.getChannel();
 
             fileChannel
