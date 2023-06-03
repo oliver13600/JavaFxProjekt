@@ -6,6 +6,7 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -16,6 +17,7 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         Parent root = FXMLDependencyInjector.load("main-view.fxml", Locale.ENGLISH);
         Scene scene = new Scene(root, 1200,500);
+        stage.getIcons().add(new Image("file:mapCollection/mapIcon.png"));
         stage.setTitle("Tour Planer");
         stage.setScene(scene);
         stage.show();

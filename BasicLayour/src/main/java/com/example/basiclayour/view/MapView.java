@@ -20,7 +20,7 @@ public class MapView {
     private final MapService mapService;
     private  final EventAggregator eventAggregator;
 
-    public MapView(MapService mapService ,EventAggregator eventAggregator) {
+    public MapView(MapService mapService, EventAggregator eventAggregator) {
         this.mapService = mapService;
         this.eventAggregator = eventAggregator;
 
@@ -28,11 +28,16 @@ public class MapView {
                 Event.SELECTED_TOUR,
                 this::setNewImagePath
         );
+
+        eventAggregator.addSubscriber(
+                Event.DELETE_TOUR,
+                this::deleteImage
+        );
     }
 
     @FXML
     void initialize() {
-        mapImage = new Image(getClass().getResourceAsStream("/com/example/basiclayour/mapCollection/map.jpg"));
+        mapImage = new Image("file:mapCollection/map.jpg");
         imageView.setImage(mapImage);
     }
 
@@ -42,23 +47,27 @@ public class MapView {
        String filePath[] = imagePath.split(":");
        File file = new File(filePath[1]); // "mapCollection/Krems-to-Graz.jpg"
 
-       //String filename = "file:mapCollection/Krems-to-Graz.jpg";
-
        if(file.exists()){
            mapImage = new Image(imagePath);
            imageView.setImage(mapImage);
        } else {
            mapImage = new Image("file:mapCollection/mapError.png");
            imageView.setImage(mapImage);
+           System.out.println("No file found for display");
           //throw new RuntimeException("File does not exist");
        }
+   }
 
-       //if (getClass().getResourceAsStream(imagePath) != null) {
-           //mapImage = new Image(getClass().getResourceAsStream(imagePath));
+   public void deleteImage(){
+       String imagePath = mapService.getImagePath();
+       String filePath[] = imagePath.split(":");
+       File file = new File(filePath[1]);
 
-       //} else {
-       //     throw new RuntimeException("File does not exist...yet :(");
-       //}
+       if(file.exists()){
+            file.delete();
+       } else {
+           System.out.println("File could not be deleted because it does not exist");
+       }
    }
 
 }
