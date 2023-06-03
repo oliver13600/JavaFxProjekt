@@ -68,21 +68,21 @@ public class Tour {
         this.tourDescription = tourDescription;
     }
 
-    /*public String getFrom() {
-        return from;
+    public String getFromStart() {
+        return fromStart;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setFromStart(String fromStart) {
+        this.fromStart = fromStart;
     }
 
-    public String getTo() {
-        return to;
+    public String getToFinish() {
+        return toFinish;
     }
 
-    public void setTo(String to) {
-        this.to = to;
-    }*/
+    public void setToFinish(String toFinish) {
+        this.toFinish = toFinish;
+    }
 
     public String getTransportType() {
         return transportType;

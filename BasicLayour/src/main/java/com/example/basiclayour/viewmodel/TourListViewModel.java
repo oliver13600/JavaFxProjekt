@@ -2,6 +2,7 @@ package com.example.basiclayour.viewmodel;
 
 import com.example.basiclayour.event.Event;
 import com.example.basiclayour.event.EventAggregator;
+import com.example.basiclayour.service.MapService;
 import com.example.basiclayour.service.TourService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,15 +12,18 @@ public class TourListViewModel {
 
     private final EventAggregator eventAggregator;
     private final TourService tourService;
+    private final MapService mapService;
 
     //searchService
 
     public TourListViewModel(
             EventAggregator eventAggregator,
-            TourService tourService
+            TourService tourService,
+            MapService mapservice
     ) {
         this.eventAggregator = eventAggregator;
         this.tourService = tourService;
+        this.mapService = mapservice;
 
         tours.addAll(tourService.findAll());
 
@@ -54,7 +58,6 @@ public class TourListViewModel {
         tours.addAll(tourService.findToursByKeyword());
     }
 
-
     public ObservableList<String> getTours() {
         return tours;
     }
@@ -62,4 +65,10 @@ public class TourListViewModel {
     public void deleteTour(String keyword){
         tourService.deleteTourByKeyword(keyword);
     }
+
+    public void getSelectedItem(String selectedItem){
+        mapService.setImagePath(selectedItem);
+    }
+
+
 }

@@ -78,4 +78,8 @@ public class TourRepository {
 
         eventAggregator.publish(Event.DELETE_TOUR);
     }
+
+    public void getSelectedItem(String selectedItem){
+        eventAggregator.publish(Event.SELECTED_TOUR);
+    }
 }

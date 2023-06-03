@@ -5,6 +5,7 @@ import com.example.basiclayour.data.HibernateSessionFactory;
 import com.example.basiclayour.event.EventAggregator;
 import com.example.basiclayour.repository.TourRepository;
 import com.example.basiclayour.service.MapQuestRouteService;
+import com.example.basiclayour.service.MapService;
 import com.example.basiclayour.service.RouteService;
 import com.example.basiclayour.service.TourService;
 import com.example.basiclayour.viewmodel.AddTourViewModel;
@@ -25,8 +26,11 @@ public class ViewFactory {
 
     private final TourService tourService;
     private final SearchViewModel searchViewModel;
+
     private final AddTourViewModel addTourViewModel;
     private final TourListViewModel tourListViewModel;
+
+    private final MapService mapService;
 
     private ViewFactory() {
         eventAggregator = new EventAggregator();
@@ -35,11 +39,14 @@ public class ViewFactory {
         tourRepository = new TourRepository(sessionFactory, eventAggregator);
         tourService = new TourService(tourRepository);
 
+        mapService = new MapService(eventAggregator);
+
         routeService = new MapQuestRouteService();
 
         addTourViewModel = new AddTourViewModel(routeService, tourService);
         searchViewModel = new SearchViewModel(tourService);
-        tourListViewModel = new TourListViewModel(eventAggregator, tourService);
+
+        tourListViewModel = new TourListViewModel(eventAggregator, tourService, mapService);
     }
 
     public Object create(Class<?> viewClass) {
@@ -54,6 +61,9 @@ public class ViewFactory {
         }
         if(viewClass == TourListView.class){
             return new TourListView(tourListViewModel);
+        }
+        if(viewClass == MapView.class){
+            return new MapView(mapService,eventAggregator);
         }
 
         throw new IllegalArgumentException();

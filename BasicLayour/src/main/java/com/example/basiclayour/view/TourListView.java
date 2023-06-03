@@ -1,5 +1,6 @@
 package com.example.basiclayour.view;
 
+import com.example.basiclayour.event.Event;
 import com.example.basiclayour.model.Tour;
 import com.example.basiclayour.viewmodel.TourListViewModel;
 import javafx.fxml.FXML;
@@ -30,5 +31,12 @@ public class TourListView {
         if (selectedTour != null) {
             tourListViewModel.deleteTour(selectedTour);
         }
+    }
+
+    @FXML
+    public void handleMouseClick(){
+        String selectedTour = tours.getSelectionModel().getSelectedItem();
+        //System.out.println("Selected Tour: "+ selectedTour);
+        tourListViewModel.getSelectedItem(selectedTour);
     }
 }

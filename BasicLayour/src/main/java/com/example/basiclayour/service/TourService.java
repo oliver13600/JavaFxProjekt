@@ -66,4 +66,8 @@ public class TourService {
     public void deleteTourByKeyword(String keyword){
         tourRepository.deleteTourByKeyword(keyword);
     }
+
+    public void getSelectedItem(String selectedItem){
+        tourRepository.getSelectedItem(selectedItem);
+    }
 }

@@ -44,7 +44,8 @@
 
             <Rectangle fill="blue" width="500" height="5"></Rectangle>
 
-            <ImageView fitHeight="200.0" fitWidth="500.0"><Image url="@map.jpg"/></ImageView>
+            <!--<ImageView fitHeight="200.0" fitWidth="500.0"><Image url="@mapCollection/map.jpg"/></ImageView>-->
+            <fx:include fx:id="getMap" source="map-view.fxml"/>
 
             <HBox> <!--TourLogs-Buttons-->
                 <Label text="Tour Logs"></Label>

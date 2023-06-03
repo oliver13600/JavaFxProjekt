@@ -28,11 +28,11 @@ public class AddTourViewModel {
         String from = string1.get();
         String to = string2.get();
 
-        //String tour = "Tour: " + string1.get() + " " + string2.get();
+        String mapfileName = string1.get() + "-to-" + string2.get() + ".jpg";
 
         Route route = routeService.getRoute(from, to);
 
-        routeService.saveMap(route.getSessionId(), "map.jpg");
+        routeService.saveMap(route.getSessionId(), mapfileName);
 
         String tourInformation = "From "
                 + from + " to "

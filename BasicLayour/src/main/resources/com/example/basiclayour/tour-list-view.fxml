@@ -19,6 +19,6 @@
 
     <Rectangle fill="blue" width="300" height="5"></Rectangle>
 
-    <ListView fx:id="tours"/>
+    <ListView fx:id="tours" onMouseClicked="#handleMouseClick"/>
 
 </VBox>
