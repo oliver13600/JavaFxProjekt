@@ -12,7 +12,11 @@ public class MapService {
     }
 
     public void setImagePath(String imagePath) {
-        String tmpString = "/com/example/basiclayour/mapCollection/";
+        //String tmpString = "/com/example/basiclayour/mapCollection/";
+        //tmpString += imagePath;
+        //tmpString += ".jpg";
+
+        String tmpString = "file:mapCollection/";
         tmpString += imagePath;
         tmpString += ".jpg";
 

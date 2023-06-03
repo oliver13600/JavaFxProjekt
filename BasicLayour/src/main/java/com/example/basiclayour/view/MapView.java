@@ -7,8 +7,10 @@ import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.io.File;
+import java.net.*;
 import java.nio.file.FileSystem;
-import java.nio.file.FileSystems;
+
 
 public class MapView {
     @FXML
@@ -37,12 +39,26 @@ public class MapView {
    public void setNewImagePath() {
        String imagePath = mapService.getImagePath();
 
-       if (getClass().getResourceAsStream(imagePath) != null) {
-           mapImage = new Image(getClass().getResourceAsStream(imagePath));
+       String filePath[] = imagePath.split(":");
+       File file = new File(filePath[1]); // "mapCollection/Krems-to-Graz.jpg"
+
+       //String filename = "file:mapCollection/Krems-to-Graz.jpg";
+
+       if(file.exists()){
+           mapImage = new Image(imagePath);
            imageView.setImage(mapImage);
        } else {
-            throw new RuntimeException("File does not exist...yet :(");
+           mapImage = new Image("file:mapCollection/mapError.png");
+           imageView.setImage(mapImage);
+          //throw new RuntimeException("File does not exist");
        }
+
+       //if (getClass().getResourceAsStream(imagePath) != null) {
+           //mapImage = new Image(getClass().getResourceAsStream(imagePath));
+
+       //} else {
+       //     throw new RuntimeException("File does not exist...yet :(");
+       //}
    }
 
 }

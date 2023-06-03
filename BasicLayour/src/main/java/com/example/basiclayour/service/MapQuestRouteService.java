@@ -82,7 +82,8 @@ public class MapQuestRouteService implements RouteService{
         String uri = "https://www.mapquestapi.com/staticmap/v5/map?";
         uri += "key=" + getApiKey();
         uri += "&session=" + sessionId;
-        String filePath = "src/main/resources/com/example/basiclayour/mapCollection/" + filename;
+        //String filePath = "src/main/resources/com/example/basiclayour/mapCollection/" + filename;
+        String filePath = "mapCollection/" + filename;
 
         try {
             ReadableByteChannel readableByteChannel =
