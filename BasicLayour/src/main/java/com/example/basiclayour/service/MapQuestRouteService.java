@@ -27,11 +27,12 @@ public class MapQuestRouteService implements RouteService{
 
 
     @Override
-    public Route getRoute(String from, String to) {
+    public Route getRoute(String from, String to, String transportType) {
         String uri = "https://www.mapquestapi.com/directions/v2/route?";
         uri += "key=" + configurationService.getApiKey();
         uri += "&from=" + from;
         uri += "&to=" + to;
+        uri += "&routeType=" + getRouteType(transportType);
         uri += "&unit=k";
 
         String responseJson = "";
@@ -105,6 +106,19 @@ public class MapQuestRouteService implements RouteService{
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public String getRouteType(String choiceBoxSelection){
+        if(choiceBoxSelection == "Car"){
+            return "fastest";
+        }
+        if(choiceBoxSelection == "Bicycle"){
+            return "bicycle";
+        }
+        if(choiceBoxSelection == "Walking"){
+            return "pedestrian";
+        }
+        return "fastest";
     }
 
 }

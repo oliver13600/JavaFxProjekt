@@ -43,7 +43,7 @@ public class AddTourViewModel {
         if(allMandatoriesFilledOut == true){
             String mapfileName = string1.get() + "-to-" + string2.get() + ".jpg";
 
-            Route route = routeService.getRoute(from, to);
+            Route route = routeService.getRoute(from, to, selectedChoice);
 
             routeService.saveMap(route.getSessionId(), mapfileName);
 
@@ -82,7 +82,7 @@ public class AddTourViewModel {
     }
 
     public String getSanitizedString(String stringToSanitize){
-        stringToSanitize = stringToSanitize.replaceAll("\\W+",""); // removes anything that is not a word character
+        stringToSanitize = stringToSanitize.replaceAll("[^a-zA-Z0-9äöüÄÖÜß]",""); // removes everything except word characters + numbers + umlauts
         return stringToSanitize;
     }
 
