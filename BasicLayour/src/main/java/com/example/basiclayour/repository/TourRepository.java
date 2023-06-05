@@ -47,13 +47,15 @@ public class TourRepository {
         }
     }
 
-    public List<Tour> findToursByKeyword(){
+    public List<Tour> findToursByKeyword(String keyword){
         try (Session session = sessionFactory.openSession()) {
             CriteriaBuilder builder = session.getCriteriaBuilder();
             CriteriaQuery<Tour> criteria = builder.createQuery(Tour.class);
             Root<Tour> root = criteria.from(Tour.class);
             criteria.select(root);
-            criteria.where(builder.like(root.get("name"), "%" + "Linz" + "%"));
+            criteria.where(builder.like(root.get("tourDescription"), "%" + keyword + "%"));
+
+            System.out.println("keywordTest: " + keyword );
 
             return session.createQuery(criteria).getResultList();
         }

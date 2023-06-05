@@ -5,10 +5,7 @@ import com.example.basiclayour.configuration.ConfigurationService;
 import com.example.basiclayour.data.HibernateSessionFactory;
 import com.example.basiclayour.event.EventAggregator;
 import com.example.basiclayour.repository.TourRepository;
-import com.example.basiclayour.service.MapQuestRouteService;
-import com.example.basiclayour.service.MapService;
-import com.example.basiclayour.service.RouteService;
-import com.example.basiclayour.service.TourService;
+import com.example.basiclayour.service.*;
 import com.example.basiclayour.viewmodel.AddTourViewModel;
 import com.example.basiclayour.viewmodel.MapViewModel;
 import com.example.basiclayour.viewmodel.SearchViewModel;
@@ -28,6 +25,8 @@ public class ViewFactory {
 
     private final TourService tourService;
 
+    private final SearchService searchService;
+
     private final ConfigurationService configurationService;
     private final SearchViewModel searchViewModel;
 
@@ -44,6 +43,7 @@ public class ViewFactory {
 
         tourRepository = new TourRepository(sessionFactory, eventAggregator);
         tourService = new TourService(tourRepository);
+        searchService = new SearchService(tourRepository);
         configurationService = new ConfigurationService();
 
         mapService = new MapService(eventAggregator);
@@ -52,9 +52,9 @@ public class ViewFactory {
         routeService = new MapQuestRouteService(configurationService);
 
         addTourViewModel = new AddTourViewModel(routeService, tourService);
-        searchViewModel = new SearchViewModel(tourService);
+        searchViewModel = new SearchViewModel(tourService, searchService);
 
-        tourListViewModel = new TourListViewModel(eventAggregator, tourService, mapService);
+        tourListViewModel = new TourListViewModel(eventAggregator, tourService, mapService, searchService);
     }
 
     public Object create(Class<?> viewClass) {
