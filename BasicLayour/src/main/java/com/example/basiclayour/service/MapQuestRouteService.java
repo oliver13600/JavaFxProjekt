@@ -1,5 +1,6 @@
 package com.example.basiclayour.service;
 
+import com.example.basiclayour.configuration.ConfigurationService;
 import com.example.basiclayour.dto.MapQuestApiResponse;
 import com.example.basiclayour.dto.Route;
 
@@ -22,10 +23,13 @@ import java.util.Map;
 import java.util.Properties;
 
 public class MapQuestRouteService implements RouteService{
+
+    private final static ConfigurationService configurationService = new ConfigurationService();
+
     @Override
     public Route getRoute(String from, String to) {
         String uri = "https://www.mapquestapi.com/directions/v2/route?";
-        uri += "key=" + getApiKey();
+        uri += "key=" + configurationService.getApiKey();
         uri += "&from=" + from;
         uri += "&to=" + to;
         uri += "&unit=k";
@@ -80,7 +84,7 @@ public class MapQuestRouteService implements RouteService{
     public void saveMap(String sessionId, String filename) {
 
         String uri = "https://www.mapquestapi.com/staticmap/v5/map?";
-        uri += "key=" + getApiKey();
+        uri += "key=" + configurationService.getApiKey();
         uri += "&session=" + sessionId;
         //String filePath = "src/main/resources/com/example/basiclayour/mapCollection/" + filename;
         String filePath = "mapCollection/" + filename;
@@ -103,23 +107,4 @@ public class MapQuestRouteService implements RouteService{
         }
     }
 
-    public static String getApiKey(){
-        String systemPropertiesPath = "system.properties";
-
-        try {
-           Properties systemProperties = new Properties();
-           //load a properties file from class path, inside static method
-           systemProperties.load(new FileInputStream(systemPropertiesPath));
-
-           // check if mandatory config parameters are present
-
-
-           //get the property value and print it out
-           return systemProperties.getProperty("mapquestapikey");
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
-    }
 }
