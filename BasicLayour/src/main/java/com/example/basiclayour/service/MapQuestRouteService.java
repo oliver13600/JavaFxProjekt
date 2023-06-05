@@ -15,16 +15,16 @@ import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.nio.channels.Channel;
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
-import java.util.Map;
-import java.util.Properties;
 
 public class MapQuestRouteService implements RouteService{
+    private final ConfigurationService configurationService;
+    public MapQuestRouteService(ConfigurationService configurationService){
+        this.configurationService = configurationService;
+    }
 
-    private final static ConfigurationService configurationService = new ConfigurationService();
 
     @Override
     public Route getRoute(String from, String to) {

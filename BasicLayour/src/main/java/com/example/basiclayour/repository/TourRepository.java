@@ -69,7 +69,7 @@ public class TourRepository {
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
 
-            Query<Tour> query = session.createQuery("DELETE FROM Tour WHERE name = :keyword");
+            Query<Tour> query = session.createQuery("DELETE FROM Tour WHERE tourDescription = :keyword");
             query.setParameter("keyword", keyword);
             query.executeUpdate();
 

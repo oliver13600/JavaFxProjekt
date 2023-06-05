@@ -1,6 +1,7 @@
 package com.example.basiclayour.view;
 
 
+import com.example.basiclayour.configuration.ConfigurationService;
 import com.example.basiclayour.data.HibernateSessionFactory;
 import com.example.basiclayour.event.EventAggregator;
 import com.example.basiclayour.repository.TourRepository;
@@ -26,6 +27,8 @@ public class ViewFactory {
     private final RouteService routeService;
 
     private final TourService tourService;
+
+    private final ConfigurationService configurationService;
     private final SearchViewModel searchViewModel;
 
     private final MapViewModel mapViewModel;
@@ -41,11 +44,12 @@ public class ViewFactory {
 
         tourRepository = new TourRepository(sessionFactory, eventAggregator);
         tourService = new TourService(tourRepository);
+        configurationService = new ConfigurationService();
 
         mapService = new MapService(eventAggregator);
         mapViewModel = new MapViewModel(mapService, eventAggregator);
 
-        routeService = new MapQuestRouteService();
+        routeService = new MapQuestRouteService(configurationService);
 
         addTourViewModel = new AddTourViewModel(routeService, tourService);
         searchViewModel = new SearchViewModel(tourService);

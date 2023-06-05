@@ -5,11 +5,13 @@
 
 <VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.basiclayour.view.AddTourView">
 
+
+    <TextField fx:id="tourName" promptText="TourName" />
     <TextField fx:id="textField1" promptText="From" />
     <TextField fx:id="textField2" promptText="To" />
     <ChoiceBox fx:id="choiceBox" prefWidth="150.0"/>
 
-    <Button onAction="#addTour" text="%add_button" />
+    <Button onAction="#addTour" text="%add_button"/>
 
     <Label fx:id="output" />
 </VBox>

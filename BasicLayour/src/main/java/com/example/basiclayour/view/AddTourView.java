@@ -9,6 +9,9 @@ import javafx.scene.control.TextField;
 public class AddTourView {
 
     @FXML
+    private TextField tourName;
+
+    @FXML
     private TextField textField1;
 
     @FXML
@@ -28,17 +31,23 @@ public class AddTourView {
 
     @FXML
     void initialize() {
+        tourName.textProperty()
+                .bindBidirectional(addTourViewModel.tourNameProperty());
         textField1.textProperty()
                 .bindBidirectional(addTourViewModel.string1Property());
         textField2.textProperty()
                 .bindBidirectional(addTourViewModel.string2Property());
         output.textProperty()
                 .bind(addTourViewModel.outputProperty());
+
+        choiceBox.setValue(addTourViewModel.setDefaultValue());
+        choiceBox.setItems(addTourViewModel.getChoiceBoxInputs());
     }
 
     @FXML
     private void addTour() {
-        addTourViewModel.addTour();
+        String selectedChoice = choiceBox.getSelectionModel().getSelectedItem();
+        addTourViewModel.addTour(selectedChoice);
     }
 
 }

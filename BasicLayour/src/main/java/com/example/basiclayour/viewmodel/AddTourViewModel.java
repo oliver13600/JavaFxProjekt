@@ -6,11 +6,17 @@ import com.example.basiclayour.service.RouteService;
 import com.example.basiclayour.service.TourService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class AddTourViewModel {
+
+    private final StringProperty tourName = new SimpleStringProperty("");
     private final StringProperty string1 = new SimpleStringProperty("");
     private final StringProperty string2 = new SimpleStringProperty("");
     private final StringProperty output = new SimpleStringProperty("");
+
+    private final ObservableList<String> choiceBoxInputs = FXCollections.observableArrayList();
     private final TourService tourService;
     private final RouteService routeService;
 
@@ -24,30 +30,60 @@ public class AddTourViewModel {
 
     }
 
-    public void addTour() {
+    public void addTour(String selectedChoice) {
+        boolean allMandatoriesFilledOut = true;
+        String tourNameString = tourName.get();
         String from = string1.get();
         String to = string2.get();
 
-        String mapfileName = string1.get() + "-to-" + string2.get() + ".jpg";
+        if(tourNameString.isEmpty() || from.isEmpty() || to.isEmpty()){
+            allMandatoriesFilledOut = false;
+        }
 
-        Route route = routeService.getRoute(from, to);
+        if(allMandatoriesFilledOut == true){
+            String mapfileName = string1.get() + "-to-" + string2.get() + ".jpg";
 
-        routeService.saveMap(route.getSessionId(), mapfileName);
+            Route route = routeService.getRoute(from, to);
 
-        String tourInformation = "From "
-                + from + " to "
-                + to + " in "
-                + route.getFormattedTime().toString()
-                + " (" + route.getDistance() + ")";
+            routeService.saveMap(route.getSessionId(), mapfileName);
 
-        System.out.println("Test: " + tourInformation);
+            String tourInformation = "Tour: " + getSanitizedString(tourNameString)
+                    + " From " + getSanitizedString(from)
+                    + " to " + getSanitizedString(to)
+                    + " in "
+                    + route.getFormattedTime().toString()
+                    + " (" + route.getDistance() + ")"
+                    + " transportation: " + selectedChoice;
 
-        tourService.save(tourInformation);
+            System.out.println(tourInformation);
 
-        output.set(tourInformation);
+            tourService.save(tourInformation);
+
+            output.set("Tour: " + getSanitizedString(tourNameString) + " added" + " ~ " + from + " to " + to + " ~");
+
+        } else {
+            output.set("Please fill out all TextBoxes");
+        }
 
         string1.set("");
         string2.set("");
+        tourName.set("");
+    }
+
+    public ObservableList<String> getChoiceBoxInputs(){
+        choiceBoxInputs.add(0, "Car");
+        choiceBoxInputs.add(1, "Bicycle");
+        choiceBoxInputs.add(2, "Walking");
+        return choiceBoxInputs;
+    }
+
+    public String setDefaultValue(){
+        return "Car";
+    }
+
+    public String getSanitizedString(String stringToSanitize){
+        stringToSanitize = stringToSanitize.replaceAll("\\W+",""); // removes anything that is not a word character
+        return stringToSanitize;
     }
 
     public String getString1() {
@@ -86,4 +122,15 @@ public class AddTourViewModel {
         this.output.set(output);
     }
 
+    public String getTourName() {
+        return tourName.get();
+    }
+
+    public StringProperty tourNameProperty() {
+        return tourName;
+    }
+
+    public void setTourName(String tourName) {
+        this.tourName.set(tourName);
+    }
 }
