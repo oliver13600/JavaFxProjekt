@@ -7,6 +7,7 @@
 
     <TextField fx:id="textField1" promptText="From" />
     <TextField fx:id="textField2" promptText="To" />
+    <ChoiceBox fx:id="choiceBox" prefWidth="150.0"/>
 
     <Button onAction="#addTour" text="%add_button" />
 

@@ -9,6 +9,7 @@ import com.example.basiclayour.service.MapService;
 import com.example.basiclayour.service.RouteService;
 import com.example.basiclayour.service.TourService;
 import com.example.basiclayour.viewmodel.AddTourViewModel;
+import com.example.basiclayour.viewmodel.MapViewModel;
 import com.example.basiclayour.viewmodel.SearchViewModel;
 import com.example.basiclayour.viewmodel.TourListViewModel;
 
@@ -27,6 +28,8 @@ public class ViewFactory {
     private final TourService tourService;
     private final SearchViewModel searchViewModel;
 
+    private final MapViewModel mapViewModel;
+
     private final AddTourViewModel addTourViewModel;
     private final TourListViewModel tourListViewModel;
 
@@ -40,6 +43,7 @@ public class ViewFactory {
         tourService = new TourService(tourRepository);
 
         mapService = new MapService(eventAggregator);
+        mapViewModel = new MapViewModel(mapService, eventAggregator);
 
         routeService = new MapQuestRouteService();
 
@@ -63,7 +67,7 @@ public class ViewFactory {
             return new TourListView(tourListViewModel);
         }
         if(viewClass == MapView.class){
-            return new MapView(mapService,eventAggregator);
+            return new MapView(mapViewModel);
         }
 
         throw new IllegalArgumentException();

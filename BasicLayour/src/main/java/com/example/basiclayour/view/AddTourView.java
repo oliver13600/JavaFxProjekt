@@ -2,6 +2,7 @@ package com.example.basiclayour.view;
 
 import com.example.basiclayour.viewmodel.AddTourViewModel;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -12,6 +13,9 @@ public class AddTourView {
 
     @FXML
     private TextField textField2;
+
+    @FXML
+    private ChoiceBox<String> choiceBox;
 
     @FXML
     private Label output;
