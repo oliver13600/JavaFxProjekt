@@ -9,21 +9,12 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.control.skin.TabPaneSkin.TabContentRegion?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.basiclayour.view.MainView">
 
-
-    <HBox> <!--HBox mit MenuBar-->
-        <MenuBar minWidth="800">
-            <Menu text="File"></Menu>
-            <Menu text="Edit"></Menu>
-            <Menu text="Options"></Menu>
-            <Menu></Menu>
-            <Menu></Menu>
-            <Menu text="Help"></Menu>
-        </MenuBar>
-    </HBox>
+    <fx:include fx:id="menu" source="menu-bar-view.fxml"/>
 
     <fx:include fx:id="search" source="search-view.fxml"/>
 

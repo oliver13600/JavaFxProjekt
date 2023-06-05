@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.basiclayour.view.MenuBarView">
+    <MenuBar minWidth="1500">
+        <Menu text="File">
+            <items>
+                <Menu text="Import">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Load CSV" />
+                    </items>
+
+                </Menu>
+
+                <Menu text="Export">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="tour-report" onAction="#tourReport"/>
+                        <MenuItem mnemonicParsing="false" text="summarize-report" />
+                    </items>
+
+                </Menu>
+            </items>
+        </Menu>
+        <Menu text="Edit"></Menu>
+        <Menu text="Options"></Menu>
+        <Menu></Menu>
+        <Menu></Menu>
+        <Menu text="Help"></Menu>
+    </MenuBar>
+</HBox>
