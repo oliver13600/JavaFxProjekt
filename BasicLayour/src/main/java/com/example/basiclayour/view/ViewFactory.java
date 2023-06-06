@@ -11,6 +11,9 @@ import com.example.basiclayour.repository.TourRepository;
 import com.example.basiclayour.service.*;
 import com.example.basiclayour.viewmodel.*;
 
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
 public class ViewFactory {
     private static ViewFactory instance;
     private final EventAggregator eventAggregator;
@@ -28,6 +31,7 @@ public class ViewFactory {
     private final AddTourLogViewModel addTourLogViewModel;
     private final TourListViewModel tourListViewModel;
     private final MapService mapService;
+
 
     private ViewFactory() {
         eventAggregator = new EventAggregator();

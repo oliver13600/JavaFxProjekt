@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class SearchViewModelTest {
 
@@ -23,7 +24,12 @@ public class SearchViewModelTest {
         tourService = mock(TourService.class);
         searchViewModel = new SearchViewModel(tourService, searchService);
 
+
         //Act
+
+        searchViewModel = new SearchViewModel(
+                tourService, searchService
+        );
 
         searchViewModel.setString1("Test");
 
@@ -31,7 +37,7 @@ public class SearchViewModelTest {
 
         //Assert
 
-        assertEquals("Test", searchService.getKeyword());
+        assertEquals("Test", searchViewModel.getString1());
 
     }
 

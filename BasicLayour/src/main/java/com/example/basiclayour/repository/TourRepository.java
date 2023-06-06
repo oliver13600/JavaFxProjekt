@@ -5,6 +5,9 @@ import com.example.basiclayour.event.Event;
 import com.example.basiclayour.event.EventAggregator;
 
 import java.util.List;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
+
 import com.example.basiclayour.data.HibernateSessionFactory;
 import com.example.basiclayour.model.Tour;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -15,6 +18,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 public class TourRepository {
+
     private final HibernateSessionFactory sessionFactory;
     private final EventAggregator eventAggregator;
 
