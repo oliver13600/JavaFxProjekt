@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.basiclayour.view.AddTourLogView">
+
+
+
+
+    <HBox spacing="5">
+        <children>
+            <DatePicker fx:id="logDate"></DatePicker>
+            <TextField fx:id="hours" promptText="Hour"/>
+            <TextField fx:id="minutes" promptText="Minute"/>
+        </children>
+    </HBox>
+
+    <TextField fx:id="logComment" promptText="Comment" />
+    <TextField fx:id="logDifficulty" promptText="Difficulty" />
+    <TextField fx:id="totalTime" promptText="totalTime" />
+    <ChoiceBox fx:id="choiceBoxRating" prefWidth="150.0"/>
+
+    <Button onAction="#addTourLog" text="%add_button"/>
+
+    <Label fx:id="output" />
+</VBox>

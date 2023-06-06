@@ -56,6 +56,9 @@
                 </columns>
             </TableView>
         </VBox>
+
+        <fx:include fx:id="addTourLog" source="addTourLog-view.fxml"/>
+
     </HBox>
 
 

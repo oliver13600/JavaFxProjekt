@@ -25,6 +25,7 @@ public class ViewFactory {
     private final MapViewModel mapViewModel;
     private final MenuBarViewModel menuBarViewModel;
     private final AddTourViewModel addTourViewModel;
+    private final AddTourLogViewModel addTourLogViewModel;
     private final TourListViewModel tourListViewModel;
     private final MapService mapService;
 
@@ -47,6 +48,7 @@ public class ViewFactory {
         mapViewModel = new MapViewModel(mapService, eventAggregator);
         menuBarViewModel = new MenuBarViewModel(pdfGenerationService);
         addTourViewModel = new AddTourViewModel(routeService, tourService);
+        addTourLogViewModel = new AddTourLogViewModel();
         searchViewModel = new SearchViewModel(tourService, searchService);
         tourListViewModel = new TourListViewModel(eventAggregator, tourService, mapService, searchService);
     }
@@ -69,6 +71,9 @@ public class ViewFactory {
         }
         if(viewClass == MenuBarView.class){
             return new MenuBarView(menuBarViewModel);
+        }
+        if(viewClass == AddTourLogView.class){
+            return new AddTourLogView(addTourLogViewModel);
         }
 
         throw new IllegalArgumentException();
