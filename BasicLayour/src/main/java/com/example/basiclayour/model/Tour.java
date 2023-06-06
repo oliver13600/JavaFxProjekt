@@ -115,4 +115,5 @@ public class Tour {
     public void setTourInformation(String tourInformation) {
         this.tourInformation = tourInformation;
     }
+
 }

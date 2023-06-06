@@ -1,6 +1,5 @@
 package com.example.basiclayour.service;
 
-import com.example.basiclayour.configuration.ConfigurationService;
 import com.example.basiclayour.dto.MapQuestApiResponse;
 import com.example.basiclayour.dto.Route;
 

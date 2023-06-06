@@ -1,10 +1,10 @@
-package com.example.basiclayour.configuration;
+package com.example.basiclayour.service;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class ConfigurationService implements IConfiguration {
+public class PropertiesFileService implements ConfigurationService {
 
     public static String readFromConfigFile(String key){
 

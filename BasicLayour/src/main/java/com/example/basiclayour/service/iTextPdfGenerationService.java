@@ -1,15 +1,9 @@
-package com.example.basiclayour.pdfGeneration;
+package com.example.basiclayour.service;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import com.example.basiclayour.model.Tour;
-import com.example.basiclayour.repository.TourRepository;
-import com.example.basiclayour.service.SearchService;
-import com.example.basiclayour.service.TourService;
+
 import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.layout.element.Image;
@@ -21,27 +15,35 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
 
-public class PdfGenerationService implements PdfGenerator {
+public class iTextPdfGenerationService implements PdfGenerationService {
 
     private final TourService tourService;
 
-    public PdfGenerationService(TourService tourService){
+    public iTextPdfGenerationService(TourService tourService){
         this.tourService = tourService;
     }
 
     @Override
     public void tourReport(String tourName) throws IOException {
 
-        List<String> oneTour = tourService.findAll();
+        List<String> oneTour = tourService.getTourInformation("Graz-to-Wien");
 
-        // muss beim tourservice ein funktion schreiben die alle daten von einer tour ausgibt + alle logs dann noch davon
+        // Tour: Test83459 From Graz to Wien in 01:58:04 (193.8) transportation: Car
+        String splitString[] = oneTour.toString().split(" ");
+        String StringName = splitString[1];
+        String StringFrom = splitString[3];
+        String StringTo = splitString[5];
+        String StringDuration = splitString[7];
+        String StringDistance = splitString[8];
+        String StringTransportation = splitString[10];
+        StringTransportation = StringTransportation.replaceAll("]", "");
 
-        System.out.println(oneTour.toString());
-
+        // Name Document
         PdfDocument pdf = new PdfDocument(new PdfWriter("TourReport.pdf"));
         // Initialize document
         Document document = new Document(pdf);
 
+        // Set Header for PDF
         Paragraph tourHeader = new Paragraph("Tour-Report:")
                 .setFont(PdfFontFactory.createFont(StandardFonts.HELVETICA))
                 .setFontSize(32)
@@ -49,23 +51,39 @@ public class PdfGenerationService implements PdfGenerator {
 
         document.add(tourHeader);
 
-        for (String string : oneTour) { // noch ändern
-            document.add(new Paragraph(string.toString()));
-        }
+        // Set Header for TourName
+        Paragraph tourNameHeader = new Paragraph(StringName)
+                .setFont(PdfFontFactory.createFont(StandardFonts.HELVETICA))
+                .setFontSize(26)
+                .setBold();
 
-       // document.add(new Paragraph("This is a Test\n));
+        document.add(tourNameHeader);
 
+        // Add TourInformation
+        document.add(new Paragraph("From: " + StringFrom));
+        document.add(new Paragraph("To : " + StringTo));
+        document.add(new Paragraph("Duration: " + StringDuration));
+        document.add(new Paragraph("Distance: " + StringDistance));
+        document.add(new Paragraph("Transportation-Type: " + StringTransportation));
+
+        // Set Image of tour
         ImageData data = ImageDataFactory.create("mapCollection/Graz-to-Wien.jpg");
         Image image = new Image(data);
         image.scaleAbsolute(400, 400);
         document.add(image);
 
+        // Set Header of tour-logs
         Paragraph tourLogsHeader = new Paragraph("Tour Logs:")
                 .setFont(PdfFontFactory.createFont(StandardFonts.HELVETICA))
                 .setFontSize(32)
                 .setBold();
 
         document.add(tourLogsHeader);
+
+
+        // Add TourLog Information - work in progress......
+
+
 
         //Close document
         document.close();

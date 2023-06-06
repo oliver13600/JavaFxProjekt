@@ -1,10 +1,12 @@
 package com.example.basiclayour.view;
 
 
-import com.example.basiclayour.configuration.ConfigurationService;
+import com.example.basiclayour.service.ConfigurationService;
+import com.example.basiclayour.service.PropertiesFileService;
 import com.example.basiclayour.data.HibernateSessionFactory;
 import com.example.basiclayour.event.EventAggregator;
-import com.example.basiclayour.pdfGeneration.PdfGenerationService;
+import com.example.basiclayour.service.PdfGenerationService;
+import com.example.basiclayour.service.iTextPdfGenerationService;
 import com.example.basiclayour.repository.TourRepository;
 import com.example.basiclayour.service.*;
 import com.example.basiclayour.viewmodel.*;
@@ -15,9 +17,9 @@ public class ViewFactory {
     private final HibernateSessionFactory sessionFactory;
     private final TourRepository tourRepository;
     private final RouteService routeService;
+    private final PdfGenerationService pdfGenerationService;
     private final TourService tourService;
     private final SearchService searchService;
-    private final PdfGenerationService pdfGenerationService;
     private final ConfigurationService configurationService;
     private final SearchViewModel searchViewModel;
     private final MapViewModel mapViewModel;
@@ -35,10 +37,12 @@ public class ViewFactory {
 
         tourService = new TourService(tourRepository);
         searchService = new SearchService(tourRepository);
-        configurationService = new ConfigurationService();
-        pdfGenerationService = new PdfGenerationService(tourService);
+
+        configurationService = new PropertiesFileService();
+
         mapService = new MapService(eventAggregator);
         routeService = new MapQuestRouteService(configurationService);
+        pdfGenerationService = new iTextPdfGenerationService(tourService);
 
         mapViewModel = new MapViewModel(mapService, eventAggregator);
         menuBarViewModel = new MenuBarViewModel(pdfGenerationService);
