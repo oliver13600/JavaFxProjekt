@@ -41,4 +41,29 @@ public class SearchViewModelTest {
 
     }
 
+    @Test
+    public void searchTest2()
+    {
+        //Arrange
+        searchService = mock(SearchService.class);
+        tourService = mock(TourService.class);
+        searchViewModel = new SearchViewModel(tourService, searchService);
+
+
+        //Act
+
+        searchViewModel = new SearchViewModel(
+                tourService, searchService
+        );
+
+        searchViewModel.setString1("");
+
+        searchViewModel.searchTour();
+
+        //Assert
+
+        assertEquals("", searchViewModel.getString1());
+
+    }
+
 }
