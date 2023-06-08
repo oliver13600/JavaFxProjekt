@@ -3,11 +3,14 @@ package com.example.basiclayour.viewmodel;
 
 import com.example.basiclayour.dto.Route;
 import com.example.basiclayour.service.RouteService;
+import com.example.basiclayour.service.TourLogService;
 import com.example.basiclayour.service.TourService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class AddTourViewModel {
 
@@ -19,6 +22,7 @@ public class AddTourViewModel {
     private final ObservableList<String> choiceBoxInputs = FXCollections.observableArrayList();
     private final TourService tourService;
     private final RouteService routeService;
+    private static final Logger logger = LogManager.getLogger(AddTourViewModel.class);
 
     public AddTourViewModel(
             RouteService routeService,
@@ -36,7 +40,7 @@ public class AddTourViewModel {
         String from = string1.get();
         String to = string2.get();
 
-        if(tourNameString.isEmpty() || from.isEmpty() || to.isEmpty()){
+        if(getSanitizedString(tourNameString).isEmpty() || getSanitizedString(from).isEmpty() || getSanitizedString(to).isEmpty()){
             allMandatoriesFilledOut = false;
         }
 
@@ -57,9 +61,7 @@ public class AddTourViewModel {
                         + " (" + route.getDistance() + ")"
                         + " transportation: " + selectedChoice;
 
-                System.out.println(tourInformation);
-
-
+                logger.debug("TourInformation: " + tourInformation);
 
                 tourService.save(tourInformation);
 

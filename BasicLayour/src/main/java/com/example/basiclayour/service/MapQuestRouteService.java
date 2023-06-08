@@ -107,7 +107,7 @@ public class MapQuestRouteService implements RouteService{
             fileOutputStream.close();
             readableByteChannel.close();
         } catch (IOException e) {
-            logger.error(e);
+            logger.error("Error Saving Map: " + e);
         }
     }
 

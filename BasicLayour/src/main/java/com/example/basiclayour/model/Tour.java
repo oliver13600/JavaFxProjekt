@@ -1,6 +1,7 @@
 package com.example.basiclayour.model;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.Cascade;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ public class Tour {
     private float estimatedTime;
     @Column
     private String tourInformation;
-    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<TourLog> tourLogs;
 
     public Tour(){

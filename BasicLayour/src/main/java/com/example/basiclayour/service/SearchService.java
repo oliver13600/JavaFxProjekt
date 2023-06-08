@@ -9,9 +9,7 @@ import java.util.stream.Collectors;
 public class SearchService {
 
     private final TourRepository tourRepository;
-
     private String keyword;
-
 
     public SearchService(TourRepository tourRepository) {
         this.tourRepository = tourRepository;

@@ -7,6 +7,8 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 
@@ -15,6 +17,8 @@ public class MapViewModel {
     private final ObjectProperty<Image> mapImage = new SimpleObjectProperty<Image>();
     private final MapService mapService;
     private  final EventAggregator eventAggregator;
+
+    private static final Logger logger = LogManager.getLogger(MapViewModel.class);
 
     public MapViewModel(MapService mapService, EventAggregator eventAggregator){
         this.mapService = mapService;
@@ -44,8 +48,7 @@ public class MapViewModel {
         } else {
             Image image = new Image("file:mapCollection/mapError.png");
             mapImage.set(image);
-            System.out.println("No file found for display");
-            //throw new RuntimeException("File does not exist");
+            logger.error("No file found for display - fileNotFound");
         }
     }
 
@@ -57,7 +60,7 @@ public class MapViewModel {
         if(file.exists()){
             file.delete();
         } else {
-            System.out.println("File could not be deleted because it does not exist");
+            logger.error("File could not be deleted because it does not exist");
         }
     }
 

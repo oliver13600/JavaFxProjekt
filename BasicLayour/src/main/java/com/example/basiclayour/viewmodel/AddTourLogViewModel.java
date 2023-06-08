@@ -16,18 +16,16 @@ public class AddTourLogViewModel {
 
     private final StringProperty minutes = new SimpleStringProperty("");
     private final StringProperty hours = new SimpleStringProperty("");
-
     private final ObjectProperty<LocalDate> logDate = new SimpleObjectProperty<>();
     private final StringProperty logComment = new SimpleStringProperty("");
     private final StringProperty totalTime = new SimpleStringProperty("");
     private final StringProperty output = new SimpleStringProperty("");
     private final ObservableList<String> choiceBoxRating = FXCollections.observableArrayList();
-
     private final ObservableList<String> choiceBoxDifficulty = FXCollections.observableArrayList();
 
     private final TourLogService tourLogService;
-
     private final MapService mapService;
+
 
     public AddTourLogViewModel(TourLogService tourLogService, MapService mapService){
         this.tourLogService = tourLogService;

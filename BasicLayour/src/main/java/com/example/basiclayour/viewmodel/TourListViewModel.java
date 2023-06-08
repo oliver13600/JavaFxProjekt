@@ -12,12 +12,10 @@ public class TourListViewModel {
     private final EventAggregator eventAggregator;
     private final TourService tourService;
     private final MapService mapService;
-
     private final PdfGenerationService pdfGenerationService;
-
     private final SearchService searchService;
 
-    //searchService
+
 
     public TourListViewModel(
             EventAggregator eventAggregator,
@@ -78,6 +76,5 @@ public class TourListViewModel {
         pdfGenerationService.setTourToPdf(selectedItem);
 
     }
-
 
 }
