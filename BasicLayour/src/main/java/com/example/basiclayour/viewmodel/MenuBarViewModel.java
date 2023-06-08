@@ -1,6 +1,7 @@
 package com.example.basiclayour.viewmodel;
 
 import com.example.basiclayour.service.PdfGenerationService;
+import com.example.basiclayour.service.TourService;
 
 import java.io.IOException;
 
@@ -14,7 +15,7 @@ public class MenuBarViewModel {
 
     public void generatePdf(){
         try {
-            pdfGenerationService.tourReport("FART");
+            pdfGenerationService.tourReport();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

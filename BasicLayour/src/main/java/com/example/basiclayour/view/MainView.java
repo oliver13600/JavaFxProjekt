@@ -15,4 +15,7 @@ public class MainView {
     @FXML
     private AddTourLogView addTourLogView;
 
+    @FXML
+    private TourLogListView tourLogListView;
+
 }

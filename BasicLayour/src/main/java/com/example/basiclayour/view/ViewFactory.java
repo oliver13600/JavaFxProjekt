@@ -1,6 +1,8 @@
 package com.example.basiclayour.view;
 
 
+import com.example.basiclayour.model.TourLog;
+import com.example.basiclayour.repository.TourLogRepository;
 import com.example.basiclayour.service.ConfigurationService;
 import com.example.basiclayour.service.PropertiesFileService;
 import com.example.basiclayour.data.HibernateSessionFactory;
@@ -19,9 +21,11 @@ public class ViewFactory {
     private final EventAggregator eventAggregator;
     private final HibernateSessionFactory sessionFactory;
     private final TourRepository tourRepository;
+    private final TourLogRepository tourLogRepository;
     private final RouteService routeService;
     private final PdfGenerationService pdfGenerationService;
     private final TourService tourService;
+    private final TourLogService tourLogService;
     private final SearchService searchService;
     private final ConfigurationService configurationService;
     private final SearchViewModel searchViewModel;
@@ -30,8 +34,8 @@ public class ViewFactory {
     private final AddTourViewModel addTourViewModel;
     private final AddTourLogViewModel addTourLogViewModel;
     private final TourListViewModel tourListViewModel;
+    private final TourLogListViewModel tourLogListViewModel;
     private final MapService mapService;
-
 
     private ViewFactory() {
         eventAggregator = new EventAggregator();
@@ -39,22 +43,26 @@ public class ViewFactory {
         sessionFactory = new HibernateSessionFactory();
 
         tourRepository = new TourRepository(sessionFactory, eventAggregator);
+        tourLogRepository = new TourLogRepository(sessionFactory, eventAggregator);
 
         tourService = new TourService(tourRepository);
         searchService = new SearchService(tourRepository);
 
+        tourLogService = new TourLogService(tourLogRepository, tourRepository);
+
         configurationService = new PropertiesFileService();
 
-        mapService = new MapService(eventAggregator);
+        mapService = new MapService(eventAggregator, tourService);
         routeService = new MapQuestRouteService(configurationService);
-        pdfGenerationService = new iTextPdfGenerationService(tourService);
+        pdfGenerationService = new iTextPdfGenerationService(tourService, tourLogService);
 
         mapViewModel = new MapViewModel(mapService, eventAggregator);
         menuBarViewModel = new MenuBarViewModel(pdfGenerationService);
         addTourViewModel = new AddTourViewModel(routeService, tourService);
-        addTourLogViewModel = new AddTourLogViewModel();
+        addTourLogViewModel = new AddTourLogViewModel(tourLogService, mapService);
         searchViewModel = new SearchViewModel(tourService, searchService);
-        tourListViewModel = new TourListViewModel(eventAggregator, tourService, mapService, searchService);
+        tourListViewModel = new TourListViewModel(eventAggregator, tourService, mapService, searchService, pdfGenerationService);
+        tourLogListViewModel = new TourLogListViewModel(eventAggregator, tourLogService);
     }
 
     public Object create(Class<?> viewClass) {
@@ -78,6 +86,9 @@ public class ViewFactory {
         }
         if(viewClass == AddTourLogView.class){
             return new AddTourLogView(addTourLogViewModel);
+        }
+        if(viewClass == TourLogListView.class){
+            return new TourLogListView(tourLogListViewModel);
         }
 
         throw new IllegalArgumentException();

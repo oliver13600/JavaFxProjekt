@@ -45,24 +45,31 @@ public class AddTourViewModel {
 
             Route route = routeService.getRoute(from, to, selectedChoice);
 
+            if(route != null){
+
             routeService.saveMap(route.getSessionId(), mapfileName);
 
-            String tourInformation = "Tour: " + getSanitizedString(tourNameString)
-                    + " From " + getSanitizedString(from)
-                    + " to " + getSanitizedString(to)
-                    + " in "
-                    + route.getFormattedTime().toString()
-                    + " (" + route.getDistance() + ")"
-                    + " transportation: " + selectedChoice;
+                String tourInformation = "Tour: " + getSanitizedString(tourNameString)
+                        + " From " + getSanitizedString(from)
+                        + " to " + getSanitizedString(to)
+                        + " in "
+                        + route.getFormattedTime().toString()
+                        + " (" + route.getDistance() + ")"
+                        + " transportation: " + selectedChoice;
 
-            System.out.println(tourInformation);
+                System.out.println(tourInformation);
 
-            tourService.save(tourInformation);
 
-            output.set("Tour: " + getSanitizedString(tourNameString) + " added" + " ~ " + from + " to " + to + " ~");
+
+                tourService.save(tourInformation);
+
+                output.set("Tour: " + getSanitizedString(tourNameString) + " added" + " ~ " + from + " to " + to + " ~");
+            } else {
+                output.set("Something went wrong when trying to get the route");
+            }
 
         } else {
-            output.set("Please fill out all TextBoxes");
+            output.set("Please fill out all TextFields");
         }
 
         string1.set("");

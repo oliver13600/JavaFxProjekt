@@ -13,6 +13,7 @@ import com.example.basiclayour.model.Tour;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -57,14 +58,42 @@ public class TourRepository {
             CriteriaQuery<Tour> criteria = builder.createQuery(Tour.class);
             Root<Tour> root = criteria.from(Tour.class);
             criteria.select(root);
-            criteria.where(builder.like(root.get("tourDescription"), "%" + keyword + "%"));
+            criteria.where(builder.like(root.get("name"), "%" + keyword + "%"));
 
             System.out.println("keywordTest: " + keyword );
 
             return session.createQuery(criteria).getResultList();
         }
-
     }
+
+    public Tour findTourByName(String keyword) {
+        try (Session session = sessionFactory.openSession()) {
+            CriteriaBuilder builder = session.getCriteriaBuilder();
+            CriteriaQuery<Tour> criteria = builder.createQuery(Tour.class);
+            Root<Tour> root = criteria.from(Tour.class);
+            criteria.select(root);
+            criteria.where(builder.like(root.get("name"), "%" + keyword + "%"));
+
+            System.out.println("keywordTest: " + keyword);
+
+            return session.createQuery(criteria)
+                    .setMaxResults(1)
+                    .uniqueResult();
+        }
+    }
+
+    public List<Tour> findToursByName(String keyword){
+        try (Session session = sessionFactory.openSession()) {
+            CriteriaBuilder builder = session.getCriteriaBuilder();
+            CriteriaQuery<Tour> criteria = builder.createQuery(Tour.class);
+            Root<Tour> root = criteria.from(Tour.class);
+            criteria.select(root);
+            criteria.where(builder.like(root.get("name"), "%" + keyword + "%"));
+
+            return session.createQuery(criteria).getResultList();
+        }
+    }
+
 
     public void searchTours(){
         eventAggregator.publish(Event.SEARCH_TOUR);
@@ -75,7 +104,7 @@ public class TourRepository {
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
 
-            Query<Tour> query = session.createQuery("DELETE FROM Tour WHERE tourDescription = :keyword");
+            Query<Tour> query = session.createQuery("DELETE FROM Tour WHERE name = :keyword");
             query.setParameter("keyword", keyword);
             query.executeUpdate();
 
@@ -85,7 +114,4 @@ public class TourRepository {
         eventAggregator.publish(Event.DELETE_TOUR);
     }
 
-    public void getSelectedItem(String selectedItem){
-        eventAggregator.publish(Event.SELECTED_TOUR);
-    }
 }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Rectangle?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.basiclayour.view.TourLogListView">
+
+    <HBox> <!--TourLogs-Buttons-->
+        <Label text="Tour Logs"></Label>
+        <Pane HBox.hgrow="ALWAYS"></Pane>
+        <Button fx:id="deleteLog" onAction="#deleteTourLog" text="+"/>
+    </HBox>
+
+    <Rectangle fill="blue" width="500" height="5"></Rectangle>
+
+    <ScrollPane hbarPolicy="ALWAYS" vbarPolicy="NEVER" fitToWidth="true">
+        <content>
+                <TableView fx:id="tourLogs" >
+                    <columns>
+                        <TableColumn fx:id="id" text="id"></TableColumn>
+                        <TableColumn fx:id="date" text="Date"></TableColumn>
+                        <TableColumn fx:id="comment" text="Comment"></TableColumn>
+                        <TableColumn fx:id="difficulty" text="Difficulty"></TableColumn>
+                        <TableColumn fx:id="totalTime" text="TotalTime"></TableColumn>
+                        <TableColumn fx:id="rating" text="Rating"></TableColumn>
+                    </columns>
+                </TableView>
+        </content>
+    </ScrollPane>
+
+
+</VBox>

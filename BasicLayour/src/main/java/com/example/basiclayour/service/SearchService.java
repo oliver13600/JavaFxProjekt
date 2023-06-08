@@ -28,7 +28,7 @@ public class SearchService {
     public List<String> findToursByKeyword(){
         return tourRepository.findToursByKeyword(keyword)
                 .stream()
-                .map(Tour::getTourDescription)
+                .map(Tour::getName)
                 .collect(Collectors.toList());
     }
 

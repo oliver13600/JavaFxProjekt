@@ -34,6 +34,8 @@ public class MapQuestRouteService implements RouteService{
         uri += "&routeType=" + getRouteType(transportType);
         uri += "&unit=k";
 
+        System.out.println("AAAAAAAAAAAAAAAAAAAAA: " + uri);
+
         String responseJson = "";
 
         try {
@@ -53,6 +55,7 @@ public class MapQuestRouteService implements RouteService{
 
             if (response.statusCode() >= 400) {
                 // handle error
+                throw new RuntimeException("MapQuestApi not repsonding...");
             }
 
         } catch (URISyntaxException e) {
@@ -86,7 +89,6 @@ public class MapQuestRouteService implements RouteService{
         String uri = "https://www.mapquestapi.com/staticmap/v5/map?";
         uri += "key=" + configurationService.getApiKey();
         uri += "&session=" + sessionId;
-        //String filePath = "src/main/resources/com/example/basiclayour/mapCollection/" + filename;
         String filePath = "mapCollection/" + filename;
 
         try {
@@ -108,13 +110,13 @@ public class MapQuestRouteService implements RouteService{
     }
 
     public String getRouteType(String choiceBoxSelection){
-        if(choiceBoxSelection == "Car"){
+        if(choiceBoxSelection.equals("Car")){
             return "fastest";
         }
-        if(choiceBoxSelection == "Bicycle"){
+        if(choiceBoxSelection.equals("Bicycle")){
             return "bicycle";
         }
-        if(choiceBoxSelection == "Walking"){
+        if(choiceBoxSelection.equals("Walking")){
             return "pedestrian";
         }
         return "fastest";

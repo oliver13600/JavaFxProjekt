@@ -1,6 +1,8 @@
 package com.example.basiclayour.model;
 
 import jakarta.persistence.*;
+import java.time.LocalDateTime;
+
 @Entity
 public class TourLog {
     @Id
@@ -8,24 +10,36 @@ public class TourLog {
     @Column
     private Long id;
     @Column
-    private String date;
+    private LocalDateTime dateTime;
     @Column
-    private float time;
+    private String comment;
     @Column
-    private String difficulty; // 1 - 5 stars?
+    private Integer difficulty; // 1 - 5 // 1=Beginner // 2=Easy // 3=Medium // 4=Hard // 5=Extreme
     @Column
     private float totalTime;
     @Column
-    private float rating; // 1-100 Rating?
+    private Integer rating; // 1 - 5 stars
+
+    @ManyToOne
+    @JoinColumn(name = "tour_name")
+    private Tour tour;
 
     public TourLog(){
 
     }
 
-    public TourLog(Long id, String date, float time, String difficulty, float totalTime, float rating) {
-        this.id = id;
-        this.date = date;
-        this.time = time;
+    public TourLog(LocalDateTime dateTime, String comment, Integer difficulty, float totalTime, int rating, Tour tour) {
+        this.dateTime = dateTime;
+        this.comment = comment;
+        this.difficulty = difficulty;
+        this.totalTime = totalTime;
+        this.rating = rating;
+        this.tour = tour;
+    }
+
+    public TourLog(LocalDateTime dateTime, String comment, Integer difficulty, float totalTime, int rating) {
+        this.dateTime = dateTime;
+        this.comment = comment;
         this.difficulty = difficulty;
         this.totalTime = totalTime;
         this.rating = rating;
@@ -35,31 +49,31 @@ public class TourLog {
         return id;
     }
 
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
 
-    public String getDate() {
-        return date;
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 
-    public float getTime() {
-        return time;
-    }
-
-    public void setTime(float time) {
-        this.time = time;
-    }
-
-    public String getDifficulty() {
+    public Integer getDifficulty() {
         return difficulty;
     }
 
-    public void setDifficulty(String difficulty) {
+    public void setDifficulty(Integer difficulty) {
         this.difficulty = difficulty;
     }
 
@@ -71,11 +85,24 @@ public class TourLog {
         this.totalTime = totalTime;
     }
 
-    public float getRating() {
+    public Integer getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    public void setRating(Integer rating) {
         this.rating = rating;
+    }
+
+    public Tour getTour() {
+        return tour;
+    }
+
+    public void setTour(Tour tour) {
+        this.tour = tour;
+    }
+
+    public String getTourLogInformation() {
+        return this.dateTime.toString() + this.comment + "|" + this.difficulty.toString()
+                + "|" +this.totalTime + "|" + this.rating.toString() + "|" + this.tour;
     }
 }

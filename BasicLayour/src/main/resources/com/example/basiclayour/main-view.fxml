@@ -38,23 +38,7 @@
             <!--<ImageView fitHeight="200.0" fitWidth="500.0"><Image url="@mapCollection/map.jpg"/></ImageView>-->
             <fx:include fx:id="getMap" source="map-view.fxml"/>
 
-            <HBox> <!--TourLogs-Buttons-->
-                <Label text="Tour Logs"></Label>
-                <Pane HBox.hgrow="ALWAYS"></Pane>
-                <Button text="+"/>
-                <Button text="-"/>
-                <Button text="..."/>
-            </HBox>
-
-            <Rectangle fill="blue" width="500" height="5"></Rectangle>
-
-            <TableView fx:id="Table2"> <!--TourLog-Tabelle-->
-                <columns>
-                    <TableColumn text="Date"></TableColumn>
-                    <TableColumn text="Duration"></TableColumn>
-                    <TableColumn text="Distance"></TableColumn>
-                </columns>
-            </TableView>
+            <fx:include fx:id="tourLogList" source="tourLog-list-view.fxml"/>
         </VBox>
 
         <fx:include fx:id="addTourLog" source="addTourLog-view.fxml"/>

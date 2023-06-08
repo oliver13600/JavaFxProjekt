@@ -23,7 +23,7 @@ public class AddTourLogView {
     private TextField logComment;
 
     @FXML
-    private TextField logDifficulty;
+    private ChoiceBox<String> choiceBoxDifficulty;
 
     @FXML
     private TextField totalTime;
@@ -50,8 +50,6 @@ public class AddTourLogView {
                         .bindBidirectional(addTourLogViewModel.hoursProperty());
         logComment.textProperty()
                 .bindBidirectional(addTourLogViewModel.logCommentProperty());
-        logDifficulty.textProperty()
-                .bindBidirectional(addTourLogViewModel.logDifficultyProperty());
         totalTime.textProperty()
                 .bindBidirectional(addTourLogViewModel.totalTimeProperty());
         output.textProperty()
@@ -59,13 +57,17 @@ public class AddTourLogView {
 
         choiceBoxRating.setItems(addTourLogViewModel.getRatingChoiceBoxInput());
         choiceBoxRating.setValue(addTourLogViewModel.setRatingChoiceBoxInput());
+
+        choiceBoxDifficulty.setItems(addTourLogViewModel.getDifficultyChoiceBoxInput());
+        choiceBoxDifficulty.setValue(addTourLogViewModel.setDifficultyChoiceBoxInput());
     }
 
     @FXML
     private void addTourLog() {
         String selectedRating = choiceBoxRating.getSelectionModel().getSelectedItem();
+        String selectedDifficulty = choiceBoxDifficulty.getSelectionModel().getSelectedItem();
 
-        addTourLogViewModel.addTourLog(selectedRating);
+        addTourLogViewModel.addTourLog(selectedRating, selectedDifficulty);
 
     }
 

@@ -11,14 +11,14 @@
     <HBox spacing="5">
         <children>
             <DatePicker fx:id="logDate"></DatePicker>
-            <TextField fx:id="hours" promptText="Hour"/>
-            <TextField fx:id="minutes" promptText="Minute"/>
+            <TextField fx:id="hours" promptText="Hour {0-23}"/>
+            <TextField fx:id="minutes" promptText="Minute {0-59}"/>
         </children>
     </HBox>
 
     <TextField fx:id="logComment" promptText="Comment" />
-    <TextField fx:id="logDifficulty" promptText="Difficulty" />
-    <TextField fx:id="totalTime" promptText="totalTime" />
+    <ChoiceBox fx:id="choiceBoxDifficulty" prefWidth="150.0"/>
+    <TextField fx:id="totalTime" promptText="totalTime in {hh:mm:ss} format" />
     <ChoiceBox fx:id="choiceBoxRating" prefWidth="150.0"/>
 
     <Button onAction="#addTourLog" text="%add_button"/>

@@ -10,7 +10,6 @@ import javafx.scene.control.ListView;
 public class TourListView {
     @FXML
     private ListView<String> tours;
-
     @FXML
     private Button deleteTour;
 
@@ -36,7 +35,6 @@ public class TourListView {
     @FXML
     public void handleMouseClick(){
         String selectedTour = tours.getSelectionModel().getSelectedItem();
-        //System.out.println("Selected Tour: "+ selectedTour);
         tourListViewModel.getSelectedItem(selectedTour);
     }
 }

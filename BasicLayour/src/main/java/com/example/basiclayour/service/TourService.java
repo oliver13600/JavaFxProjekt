@@ -26,7 +26,7 @@ public class TourService {
 
         String tourDescription = tourInformationSplit[3] + "-" + tourInformationSplit[4] + "-" + tourInformationSplit[5];
 
-        String tourDistanceString = tourInformationSplit[8].replaceAll("[\\p{Ps}\\p{Pe}]"," ");
+        String tourDistanceString = tourInformationSplit[8].replaceAll("[\\p{Ps}\\p{Pe}]"," "); // removes brackets
         float tourDistance = Float.parseFloat(tourDistanceString);
 
         String estimatedTimeString[] = tourInformationSplit[7].split(":");
@@ -48,7 +48,7 @@ public class TourService {
     public List<String> findAll() {
         return tourRepository.findAll()
                 .stream()
-                .map(Tour::getTourDescription)
+                .map(Tour::getName)
                 .collect(Collectors.toList());
     }
 
@@ -59,13 +59,15 @@ public class TourService {
                 .collect(Collectors.toList());
     }
 
-
+    public List<String> getTourDescriptionByName(String tourName){
+        return tourRepository.findToursByName(tourName)
+                .stream()
+                .map(Tour::getTourDescription)
+                .collect(Collectors.toList());
+    }
 
     public void deleteTourByKeyword(String keyword){
         tourRepository.deleteTourByKeyword(keyword);
     }
 
-    public void getSelectedItem(String selectedItem){
-        tourRepository.getSelectedItem(selectedItem);
-    }
 }

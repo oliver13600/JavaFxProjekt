@@ -1,5 +1,7 @@
 package com.example.basiclayour.data;
 
+import com.example.basiclayour.model.Tour;
+import com.example.basiclayour.model.TourLog;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
@@ -18,12 +20,20 @@ public class HibernateSessionFactory {
                         .configure()
                         .build();
 
-        sessionFactory = new MetadataSources(registry)
+        MetadataSources sources = new MetadataSources(registry);
+        sources.addAnnotatedClass(Tour.class);
+        sources.addAnnotatedClass(TourLog.class);
+
+        sessionFactory = sources.buildMetadata().buildSessionFactory();
+
+        /*sessionFactory = new MetadataSources(registry)
                 .buildMetadata()
-                .buildSessionFactory();
+                .buildSessionFactory();*/
+
     }
 
     public Session openSession() {
         return sessionFactory.openSession();
     }
+
 }

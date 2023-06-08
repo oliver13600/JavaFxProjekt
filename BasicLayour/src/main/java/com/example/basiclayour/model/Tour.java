@@ -2,6 +2,9 @@ package com.example.basiclayour.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 public class Tour {
 
@@ -25,6 +28,8 @@ public class Tour {
     private float estimatedTime;
     @Column
     private String tourInformation;
+    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL)
+    private List<TourLog> tourLogs;
 
     public Tour(){
 
@@ -38,12 +43,8 @@ public class Tour {
         this.tourDistance = tourDistance;
         this.estimatedTime = estimatedTime;
         this.tourInformation = tourInformation;
+        this.tourLogs = new ArrayList<>();
     }
-
-    public Tour(String name){
-        this.name = name;
-    }
-
     public Long getId() {
         return id;
     }
@@ -116,4 +117,11 @@ public class Tour {
         this.tourInformation = tourInformation;
     }
 
+    public List<TourLog> getTourLogs() {
+        return tourLogs;
+    }
+
+    public void setTourLogs(List<TourLog> tourLogs) {
+        this.tourLogs = tourLogs;
+    }
 }

@@ -31,7 +31,7 @@ public class AddTourViewModelTest {
         viewModel.addTour("Car");
 
         // Assert
-        assertEquals("Please fill out all TextBoxes", viewModel.getOutput());
+        assertEquals("Please fill out all TextFields", viewModel.getOutput());
     }
 
 

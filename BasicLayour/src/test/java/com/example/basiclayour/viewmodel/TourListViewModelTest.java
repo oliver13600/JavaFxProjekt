@@ -2,6 +2,7 @@ package com.example.basiclayour.viewmodel;
 
 import com.example.basiclayour.event.EventAggregator;
 import com.example.basiclayour.service.MapService;
+import com.example.basiclayour.service.PdfGenerationService;
 import com.example.basiclayour.service.SearchService;
 import com.example.basiclayour.service.TourService;
 import javafx.collections.FXCollections;
@@ -28,12 +29,15 @@ public class TourListViewModelTest {
     private MapService mapService;
 
     @Mock
+    private PdfGenerationService pdfGenerationService;
+
+    @Mock
     private SearchService searchService;
 
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        tourListViewModel = new TourListViewModel(eventAggregator, tourService, mapService, searchService);
+        tourListViewModel = new TourListViewModel(eventAggregator, tourService, mapService, searchService, pdfGenerationService);
     }
 
 
