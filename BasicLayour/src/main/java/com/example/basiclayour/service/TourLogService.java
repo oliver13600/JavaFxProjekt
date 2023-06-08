@@ -72,7 +72,7 @@ public class TourLogService {
         + " " + commentStringSplit[0] + " " +difficultyInteger + difficultyInteger
                 + " " + totalTime + " " + ratingStringSplit[0]);
 
-        System.out.println(" SELEECTED TOUR NAME: " + selectedTour);
+        System.out.println(" SELECTED TOUR NAME: " + selectedTour);
 
         Tour tour = tourRepository.findTourByName(selectedTour);
 
@@ -99,18 +99,5 @@ public class TourLogService {
         }
     }
 
-    public List<String> getTourLogInformation(String tourName){
-        return tourLogRepository.findTourLogsByTour(tourName)
-                .stream()
-                .map(TourLog::getTourLogInformation)
-                .collect(Collectors.toList());
-    }
-
-    public List<String> findAllLogs() {
-        return tourLogRepository.findAll()
-                .stream()
-                .map(TourLog::getTourLogInformation)
-                .collect(Collectors.toList());
-    }
 
 }

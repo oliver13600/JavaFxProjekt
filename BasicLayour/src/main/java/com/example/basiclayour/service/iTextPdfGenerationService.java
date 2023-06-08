@@ -1,10 +1,13 @@
 package com.example.basiclayour.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 
+import com.example.basiclayour.model.Tour;
+import com.example.basiclayour.model.TourLog;
 import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.layout.element.Image;
@@ -19,34 +22,18 @@ import com.itextpdf.layout.element.Paragraph;
 public class iTextPdfGenerationService implements PdfGenerationService {
 
     private final TourService tourService;
-
-    private final TourLogService tourLogService;
-
     public String tourToPdf;
 
-    public iTextPdfGenerationService(TourService tourService, TourLogService tourLogService){
+    public iTextPdfGenerationService(TourService tourService){
         this.tourService = tourService;
-        this.tourLogService = tourLogService;
     }
 
     @Override
     public void tourReport() throws IOException {
 
         String selectedTour = getTourToPdf();
-
-        System.out.println("Test" + selectedTour);
-
-        List<String> oneTour = tourService.getTourInformation(selectedTour);
-
-        // Tour: Test83459 From Graz to Wien in 01:58:04 (193.8) transportation: Car
-        String splitString[] = oneTour.toString().split(" ");
-        String StringName = splitString[1];
-        String StringFrom = splitString[3];
-        String StringTo = splitString[5];
-        String StringDuration = splitString[7];
-        String StringDistance = splitString[8];
-        String StringTransportation = splitString[10];
-        StringTransportation = StringTransportation.replaceAll("]", "");
+        //System.out.println("Test" + selectedTour);
+        Tour oneTour = tourService.getTourInformation(selectedTour);
 
         // Name Document
         PdfDocument pdf = new PdfDocument(new PdfWriter("TourReport.pdf"));
@@ -62,7 +49,7 @@ public class iTextPdfGenerationService implements PdfGenerationService {
         document.add(tourHeader);
 
         // Set Header for TourName
-        Paragraph tourNameHeader = new Paragraph(StringName)
+        Paragraph tourNameHeader = new Paragraph(oneTour.getName())
                 .setFont(PdfFontFactory.createFont(StandardFonts.HELVETICA))
                 .setFontSize(26)
                 .setBold();
@@ -70,14 +57,14 @@ public class iTextPdfGenerationService implements PdfGenerationService {
         document.add(tourNameHeader);
 
         // Add TourInformation
-        document.add(new Paragraph("From: " + StringFrom));
-        document.add(new Paragraph("To : " + StringTo));
-        document.add(new Paragraph("Duration: " + StringDuration));
-        document.add(new Paragraph("Distance: " + StringDistance));
-        document.add(new Paragraph("Transportation-Type: " + StringTransportation));
+        document.add(new Paragraph("From: " + oneTour.getFromStart()));
+        document.add(new Paragraph("To: " + oneTour.getToFinish()));
+        document.add(new Paragraph("Duration: " + oneTour.getEstimatedTime() + " in minutes"));
+        document.add(new Paragraph("Distance: " + oneTour.getTourDistance() + " km"));
+        document.add(new Paragraph("Transportation-Type: " + oneTour.getTransportType()));
 
         // Set Image of tour
-        ImageData data = ImageDataFactory.create("mapCollection/" + StringFrom + "-to-" + StringTo + ".jpg");
+        ImageData data = ImageDataFactory.create("mapCollection/" + oneTour.getFromStart() + "-to-" + oneTour.getToFinish() + ".jpg");
         Image image = new Image(data);
         image.scaleAbsolute(400, 400);
         document.add(image);
@@ -90,51 +77,27 @@ public class iTextPdfGenerationService implements PdfGenerationService {
 
         document.add(tourLogsHeader);
 
+        // Tour Logs
+        if(oneTour.getTourLogs().size() != 0){
 
-
-        // Add TourLog Information - geht bis jetzt nur mit einem TourLog
-        List<String> tourLogs = tourLogService.getTourLogInformation(selectedTour);
-
-        System.out.println("FFFFFFFFFFFFFFFFF: " + tourLogs.toString());
-
-
-        if(tourLogs.isEmpty() == false){
-
-            for(int i = 0; i < tourLogs.size(); i++){
-
-                String tourLogsString = Arrays.toString(new String[]{tourLogs.get(i)});
-                String tourLogsStringSplit[] = tourLogsString.split("\\|");
+            for(TourLog element : oneTour.getTourLogs()){
 
                 // Date & Time
-                String dateTimeString = tourLogsStringSplit[0];
-                String finaldateTimeString[] = dateTimeString.split("T");
-                String dateString[] = finaldateTimeString[0].split("\\[");
-
-                document.add(new Paragraph("Date: " + dateString[1]));
-                document.add(new Paragraph("Time: " + finaldateTimeString[1].substring(0,5)));
+                document.add(new Paragraph("Date&Time: " + element.getDateTime()));
 
                 // Comment
-                document.add(new Paragraph("Comment: " + finaldateTimeString[1].substring(5,finaldateTimeString[1].length())));
+                document.add(new Paragraph("Comment: " + element.getComment()));
 
                 // Difficulty
-                String difficultyString = tourLogsStringSplit[1];
-                String finaldifficultyString = convertDifficultyToString(difficultyString);
-                document.add(new Paragraph("Difficulty: " + finaldifficultyString));
+                document.add(new Paragraph("Difficulty: " + convertDifficultyToString(String.valueOf(element.getDifficulty()))));
 
                 // TotalTime
-                String totalTimeString = tourLogsStringSplit[2];
-                totalTimeString += " minutes";
-                document.add(new Paragraph("Total Time: " + totalTimeString));
+                document.add(new Paragraph("Total Time: " + element.getTotalTime()));
 
                 // Rating
-                String ratingString = tourLogsStringSplit[3];
-                String finalRatingString = convertRatingToString(ratingString);
-                document.add(new Paragraph("Rating: " + finalRatingString));
+                document.add(new Paragraph("Rating: " + convertRatingToString(String.valueOf(element.getRating()))));
 
                 document.add(new Paragraph("------------------------"));
-
-                //System.out.println(tourLogs);
-                // [2023-05-30T22:23|1|1342.3667|5|com.example.basiclayour.model.Tour@39f2d2a7]
             }
             document.add(new Paragraph("--END OF FILE--"));
 

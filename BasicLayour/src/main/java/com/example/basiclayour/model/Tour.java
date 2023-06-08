@@ -28,7 +28,7 @@ public class Tour {
     private float estimatedTime;
     @Column
     private String tourInformation;
-    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<TourLog> tourLogs;
 
     public Tour(){

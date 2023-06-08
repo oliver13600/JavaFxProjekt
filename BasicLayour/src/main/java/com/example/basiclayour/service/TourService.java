@@ -52,11 +52,8 @@ public class TourService {
                 .collect(Collectors.toList());
     }
 
-    public List<String> getTourInformation(String keyword){
-        return tourRepository.findToursByKeyword(keyword)
-                .stream()
-                .map(Tour::getTourInformation)
-                .collect(Collectors.toList());
+    public Tour getTourInformation(String keyword){
+        return tourRepository.getTour(keyword);
     }
 
     public List<String> getTourDescriptionByName(String tourName){

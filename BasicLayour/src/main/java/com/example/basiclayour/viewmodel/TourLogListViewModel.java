@@ -37,7 +37,7 @@ public class TourLogListViewModel {
         this.tourLogService = tourLogService;
 
 
-        tourLogs.addAll(tourLogService.findAllLogs());
+        //tourLogs.addAll(tourLogService.findAllLogs());
 
         eventAggregator.addSubscriber(
                 Event.NEW_TOUR,
@@ -51,13 +51,13 @@ public class TourLogListViewModel {
 
     private void onNewLog() {
         tourLogs.clear();
-        tourLogs.addAll(tourLogService.findAllLogs());
+        //tourLogs.addAll(tourLogService.findAllLogs());
     }
 
     private void onDeleteLog()
     {
         tourLogs.clear();
-        tourLogs.addAll(tourLogService.findAllLogs());
+        //tourLogs.addAll(tourLogService.findAllLogs());
     }
 
     public ObservableList<String> getLogs() {

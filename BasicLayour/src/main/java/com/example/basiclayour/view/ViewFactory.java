@@ -54,7 +54,7 @@ public class ViewFactory {
 
         mapService = new MapService(eventAggregator, tourService);
         routeService = new MapQuestRouteService(configurationService);
-        pdfGenerationService = new iTextPdfGenerationService(tourService, tourLogService);
+        pdfGenerationService = new iTextPdfGenerationService(tourService);
 
         mapViewModel = new MapViewModel(mapService, eventAggregator);
         menuBarViewModel = new MenuBarViewModel(pdfGenerationService);

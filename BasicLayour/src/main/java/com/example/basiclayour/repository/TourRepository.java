@@ -66,6 +66,19 @@ public class TourRepository {
         }
     }
 
+    public Tour getTour(String keyword) {
+        try (Session session = sessionFactory.openSession()) {
+            CriteriaBuilder builder = session.getCriteriaBuilder();
+            CriteriaQuery<Tour> criteria = builder.createQuery(Tour.class);
+            Root<Tour> root = criteria.from(Tour.class);
+            criteria.select(root);
+            criteria.where(builder.like(root.get("name"), "%" + keyword + "%"));
+
+            Query<Tour> query = session.createQuery(criteria);
+            return query.setMaxResults(1).uniqueResult();
+        }
+    }
+
     public Tour findTourByName(String keyword) {
         try (Session session = sessionFactory.openSession()) {
             CriteriaBuilder builder = session.getCriteriaBuilder();
