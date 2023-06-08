@@ -1,11 +1,8 @@
 package com.example.basiclayour.service;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
-
+import com.example.basiclayour.HelloApplication;
 import com.example.basiclayour.model.Tour;
 import com.example.basiclayour.model.TourLog;
 import com.itextpdf.io.image.ImageData;
@@ -18,9 +15,11 @@ import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class iTextPdfGenerationService implements PdfGenerationService {
-
+    private static final Logger logger = LogManager.getLogger(iTextPdfGenerationService.class);
     private final TourService tourService;
     public String tourToPdf;
 
@@ -32,86 +31,94 @@ public class iTextPdfGenerationService implements PdfGenerationService {
     public void tourReport() throws IOException {
 
         String selectedTour = getTourToPdf();
-        //System.out.println("Test" + selectedTour);
-        Tour oneTour = tourService.getTourInformation(selectedTour);
 
-        // Name Document
-        PdfDocument pdf = new PdfDocument(new PdfWriter("TourReport.pdf"));
-        // Initialize document
-        Document document = new Document(pdf);
+        if(selectedTour != null){
+            //System.out.println("Test" + selectedTour);
+            Tour oneTour = tourService.getTourInformation(selectedTour);
 
-        // Set Header for PDF
-        Paragraph tourHeader = new Paragraph("Tour-Report:")
-                .setFont(PdfFontFactory.createFont(StandardFonts.HELVETICA))
-                .setFontSize(32)
-                .setBold();
+            // Name Document
+            PdfDocument pdf = new PdfDocument(new PdfWriter("TourReport.pdf"));
+            // Initialize document
+            Document document = new Document(pdf);
 
-        document.add(tourHeader);
+            // Set Header for PDF
+            Paragraph tourHeader = new Paragraph("Tour-Report:")
+                    .setFont(PdfFontFactory.createFont(StandardFonts.HELVETICA))
+                    .setFontSize(32)
+                    .setBold();
 
-        // Set Header for TourName
-        Paragraph tourNameHeader = new Paragraph(oneTour.getName())
-                .setFont(PdfFontFactory.createFont(StandardFonts.HELVETICA))
-                .setFontSize(26)
-                .setBold();
+            document.add(tourHeader);
 
-        document.add(tourNameHeader);
+            // Set Header for TourName
+            Paragraph tourNameHeader = new Paragraph(oneTour.getName())
+                    .setFont(PdfFontFactory.createFont(StandardFonts.HELVETICA))
+                    .setFontSize(26)
+                    .setBold();
 
-        // Add TourInformation
-        document.add(new Paragraph("From: " + oneTour.getFromStart()));
-        document.add(new Paragraph("To: " + oneTour.getToFinish()));
-        document.add(new Paragraph("Duration: " + oneTour.getEstimatedTime() + " in minutes"));
-        document.add(new Paragraph("Distance: " + oneTour.getTourDistance() + " km"));
-        document.add(new Paragraph("Transportation-Type: " + oneTour.getTransportType()));
+            document.add(tourNameHeader);
 
-        // Set Image of tour
-        ImageData data = ImageDataFactory.create("mapCollection/" + oneTour.getFromStart() + "-to-" + oneTour.getToFinish() + ".jpg");
-        Image image = new Image(data);
-        image.scaleAbsolute(400, 400);
-        document.add(image);
+            // Add TourInformation
+            document.add(new Paragraph("From: " + oneTour.getFromStart()));
+            document.add(new Paragraph("To: " + oneTour.getToFinish()));
+            document.add(new Paragraph("Estimated Time: " + (int)(oneTour.getEstimatedTime() / 60) + " hours and " + Math.round(oneTour.getEstimatedTime() % 60) + " minutes"));
+            document.add(new Paragraph("Distance: " + oneTour.getTourDistance() + " km"));
+            document.add(new Paragraph("Transportation-Type: " + oneTour.getTransportType()));
 
-        // Set Header of tour-logs
-        Paragraph tourLogsHeader = new Paragraph("Tour Logs:")
-                .setFont(PdfFontFactory.createFont(StandardFonts.HELVETICA))
-                .setFontSize(32)
-                .setBold();
+            // Set Image of tour
+            ImageData data = ImageDataFactory.create("mapCollection/" + oneTour.getFromStart() + "-to-" + oneTour.getToFinish() + ".jpg");
+            Image image = new Image(data);
+            image.scaleAbsolute(400, 400);
+            document.add(image);
 
-        document.add(tourLogsHeader);
+            // Set Header of tour-logs
+            Paragraph tourLogsHeader = new Paragraph("Tour Logs:")
+                    .setFont(PdfFontFactory.createFont(StandardFonts.HELVETICA))
+                    .setFontSize(32)
+                    .setBold();
 
-        // Tour Logs
-        if(oneTour.getTourLogs().size() != 0){
+            document.add(tourLogsHeader);
 
-            for(TourLog element : oneTour.getTourLogs()){
+            // Tour Logs
+            if(oneTour.getTourLogs().size() != 0){
 
-                // Date & Time
-                document.add(new Paragraph("Date&Time: " + element.getDateTime()));
+                for(TourLog element : oneTour.getTourLogs()){
 
-                // Comment
-                document.add(new Paragraph("Comment: " + element.getComment()));
+                    // Date & Time
+                    document.add(new Paragraph("Date&Time: " + element.getDateTime()));
 
-                // Difficulty
-                document.add(new Paragraph("Difficulty: " + convertDifficultyToString(String.valueOf(element.getDifficulty()))));
+                    // Comment
+                    document.add(new Paragraph("Comment: " + element.getComment()));
 
-                // TotalTime
-                document.add(new Paragraph("Total Time: " + element.getTotalTime()));
+                    // Difficulty
+                    document.add(new Paragraph("Difficulty: " + convertDifficultyToString(String.valueOf(element.getDifficulty()))));
 
-                // Rating
-                document.add(new Paragraph("Rating: " + convertRatingToString(String.valueOf(element.getRating()))));
+                    // TotalTime
+                    document.add(new Paragraph("Total Time: " + (int)(element.getTotalTime() / 60) + " hours and " + Math.round(element.getTotalTime() % 60) + " minutes"));
 
-                document.add(new Paragraph("------------------------"));
+                    // Rating
+                    document.add(new Paragraph("Rating: " + convertRatingToString(String.valueOf(element.getRating()))));
+
+                    document.add(new Paragraph("------------------------"));
+                }
+                document.add(new Paragraph("--END OF FILE--"));
+
+            } else {
+                document.add(new Paragraph("No TourLogs found :("));
             }
-            document.add(new Paragraph("--END OF FILE--"));
-
+            //Close document
+            document.close();
+            System.out.println("PDF Created");
         } else {
-            document.add(new Paragraph("No TourLogs found :("));
+            logger.error("No tour was selected");
         }
-
-        //Close document
-        document.close();
-        System.out.println("PDF Created");
     }
 
     @Override
     public void summarizeReport(){
+
+        // For each tour => avg time + distance + rating of all tourLogs
+
+
 
     }
 

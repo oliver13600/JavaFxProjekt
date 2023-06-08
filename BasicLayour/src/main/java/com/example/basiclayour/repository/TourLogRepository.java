@@ -9,11 +9,15 @@ import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.Root;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 
 import java.util.List;
 
 public class TourLogRepository {
+
+    private static final Logger logger = LogManager.getLogger(TourLogRepository.class);
     private final HibernateSessionFactory sessionFactory;
     private final EventAggregator eventAggregator;
 
@@ -31,6 +35,8 @@ public class TourLogRepository {
             session.persist(tourLog);
             session.getTransaction().commit();
         }
+
+        logger.info("New TourLog added");
 
         eventAggregator.publish(Event.NEW_LOG);
     }

@@ -6,6 +6,8 @@ import com.example.basiclayour.dto.Route;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.*;
 import java.net.URI;
@@ -20,6 +22,7 @@ import java.nio.channels.ReadableByteChannel;
 
 public class MapQuestRouteService implements RouteService{
     private final ConfigurationService configurationService;
+    private static final Logger logger = LogManager.getLogger(MapQuestRouteService.class);
     public MapQuestRouteService(ConfigurationService configurationService){
         this.configurationService = configurationService;
     }
@@ -33,8 +36,6 @@ public class MapQuestRouteService implements RouteService{
         uri += "&to=" + to;
         uri += "&routeType=" + getRouteType(transportType);
         uri += "&unit=k";
-
-        System.out.println("AAAAAAAAAAAAAAAAAAAAA: " + uri);
 
         String responseJson = "";
 
@@ -53,17 +54,18 @@ public class MapQuestRouteService implements RouteService{
 
             responseJson = response.body();
 
-            if (response.statusCode() >= 400) {
+            if (response.statusCode() >= 400) { // 500 = internal server error
                 // handle error
+
                 throw new RuntimeException("MapQuestApi not repsonding...");
             }
 
         } catch (URISyntaxException e) {
-            throw new RuntimeException(e);
+            logger.error(e);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            logger.error(e);
         } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            logger.error(e);
         }
 
         ObjectMapper mapper = new ObjectMapper()
@@ -77,7 +79,7 @@ public class MapQuestRouteService implements RouteService{
                     MapQuestApiResponse.class
             );
         } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
+            logger.error(e);
         }
 
         return apiResponse.getRoute();
@@ -105,7 +107,7 @@ public class MapQuestRouteService implements RouteService{
             fileOutputStream.close();
             readableByteChannel.close();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            logger.error(e);
         }
     }
 

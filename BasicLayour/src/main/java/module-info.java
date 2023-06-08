@@ -7,6 +7,8 @@ module com.example.basiclayour {
     requires java.naming;
     requires jakarta.persistence;
 
+    requires org.apache.logging.log4j;
+
     requires java.net.http;
     requires com.fasterxml.jackson.databind;
 

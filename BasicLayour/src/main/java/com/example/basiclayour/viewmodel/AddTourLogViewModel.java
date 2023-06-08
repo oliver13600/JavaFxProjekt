@@ -159,7 +159,7 @@ public class AddTourLogViewModel {
     }
 
     public String getSanitizedComment(String stringToSanitize){
-        stringToSanitize = stringToSanitize.replaceAll("[^a-zA-Z0-9äöüÄÖÜß]",""); // removes everything except word characters + numbers + umlauts
+        stringToSanitize = stringToSanitize.replaceAll("[^a-zA-Z0-9äöüÄÖÜß\\s]",""); // removes everything except word characters + numbers + umlauts + whitespaces
         return stringToSanitize;
     }
 
