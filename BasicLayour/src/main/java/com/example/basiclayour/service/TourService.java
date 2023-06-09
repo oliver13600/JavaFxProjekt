@@ -71,4 +71,8 @@ public class TourService {
         return tourRepository.getMatchesInTourDescription(tourDescription);
     }
 
+    public int checkForTourNameMatches(String tourName){
+        return tourRepository.getTourNameMatches(tourName);
+    }
+
 }

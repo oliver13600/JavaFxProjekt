@@ -2,12 +2,15 @@ package com.example.basiclayour.viewmodel;
 
 
 import com.example.basiclayour.dto.Route;
+import com.example.basiclayour.service.MapService;
 import com.example.basiclayour.service.RouteService;
 import com.example.basiclayour.service.TourService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class AddTourViewModel {
 
@@ -15,7 +18,7 @@ public class AddTourViewModel {
     private final StringProperty string1 = new SimpleStringProperty("");
     private final StringProperty string2 = new SimpleStringProperty("");
     private final StringProperty output = new SimpleStringProperty("");
-
+    private static final Logger logger = LogManager.getLogger(AddTourViewModel.class);
     private final ObservableList<String> choiceBoxInputs = FXCollections.observableArrayList();
     private final TourService tourService;
     private final RouteService routeService;
@@ -32,15 +35,23 @@ public class AddTourViewModel {
 
     public void addTour(String selectedChoice) {
         boolean allMandatoriesFilledOut = true;
+        boolean tourNameAvailable = true;
         String tourNameString = tourName.get();
         String from = string1.get();
         String to = string2.get();
 
-        if(tourNameString.isEmpty() || from.isEmpty() || to.isEmpty()){
+        if(getSanitizedString(tourNameString).isEmpty() || getSanitizedString(from).isEmpty() || getSanitizedString(to).isEmpty()){
             allMandatoriesFilledOut = false;
         }
 
-        if(allMandatoriesFilledOut == true){
+        // CheckIfTourNameIsNotTaken
+        if(!tourNameString.isEmpty()){
+            if(tourService.checkForTourNameMatches(getSanitizedString(tourNameString)) != 0){
+                tourNameAvailable = false;
+            }
+        }
+
+        if(allMandatoriesFilledOut == true && tourNameAvailable == true){
             String mapfileName = string1.get() + "-to-" + string2.get() + ".jpg";
 
             Route route = routeService.getRoute(from, to, selectedChoice);
@@ -57,9 +68,7 @@ public class AddTourViewModel {
                         + " (" + route.getDistance() + ")"
                         + " transportation: " + selectedChoice;
 
-                System.out.println(tourInformation);
-
-
+                logger.info("TourInformation: " + tourInformation);
 
                 tourService.save(tourInformation);
 
@@ -68,6 +77,8 @@ public class AddTourViewModel {
                 output.set("Something went wrong when trying to get the route");
             }
 
+        } else if(tourNameAvailable == false) {
+            output.set("This TourName is already taken");
         } else {
             output.set("Please fill out all TextFields");
         }

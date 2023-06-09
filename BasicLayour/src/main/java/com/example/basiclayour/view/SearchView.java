@@ -9,7 +9,6 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import org.controlsfx.control.textfield.TextFields;
 
 import java.util.Arrays;
 import java.util.List;

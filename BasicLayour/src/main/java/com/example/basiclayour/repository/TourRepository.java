@@ -159,7 +159,19 @@ public class TourRepository {
             countQuery.setParameter("searchTerm", "%" + searchTerm + "%");
             Long count = countQuery.uniqueResult();
 
-            logger.info("TourDescription: "+ searchTerm + "found " + count + " matches in the database");
+            logger.info("TourDescription: "+ searchTerm + " found " + count + " matches in the database");
+
+            return count.intValue();
+        }
+    }
+
+    public int getTourNameMatches(String searchTerm){
+        try (Session session = sessionFactory.openSession()) {
+            Query<Long> countQuery = session.createQuery("SELECT COUNT(*) FROM Tour WHERE name LIKE :searchTerm");
+            countQuery.setParameter("searchTerm", "%" + searchTerm + "%");
+            Long count = countQuery.uniqueResult();
+
+            logger.info("Tourname: "+ searchTerm + " found " + count + " matches in the database");
 
             return count.intValue();
         }
