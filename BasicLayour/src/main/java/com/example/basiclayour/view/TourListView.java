@@ -5,6 +5,7 @@ import com.example.basiclayour.model.Tour;
 import com.example.basiclayour.viewmodel.TourListViewModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
 public class TourListView {
@@ -12,6 +13,8 @@ public class TourListView {
     private ListView<String> tours;
     @FXML
     private Button deleteTour;
+    @FXML
+    private Label tourDetails;
 
     private final TourListViewModel tourListViewModel;
 
@@ -22,6 +25,9 @@ public class TourListView {
     @FXML
     void initialize() {
         tours.setItems(tourListViewModel.getTours());
+
+        tourDetails.textProperty()
+                .bindBidirectional(tourListViewModel.tourDetailsProperty());
     }
 
     @FXML

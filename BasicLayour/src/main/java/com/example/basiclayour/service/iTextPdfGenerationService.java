@@ -33,7 +33,7 @@ public class iTextPdfGenerationService implements PdfGenerationService {
         String selectedTour = getTourToPdf();
 
         if(selectedTour != null){
-            //System.out.println("Test" + selectedTour);
+            logger.info("Creating Pdf for: " + selectedTour);
             Tour oneTour = tourService.getTourInformation(selectedTour);
 
             // Name Document
@@ -107,8 +107,8 @@ public class iTextPdfGenerationService implements PdfGenerationService {
             }
             //Close document
             document.close();
-            System.out.println("PDF Created");
-        } else {
+            logger.info("SUCCESS - PDF Created for: " + selectedTour);
+         } else {
             logger.error("No tour was selected");
         }
     }

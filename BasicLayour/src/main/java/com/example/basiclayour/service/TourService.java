@@ -75,4 +75,9 @@ public class TourService {
         return tourRepository.getTourNameMatches(tourName);
     }
 
+    public String getTourInformationForDetails(String keyword){
+        return tourRepository.getTourInformationForDetails(keyword);
+    }
+
+
 }

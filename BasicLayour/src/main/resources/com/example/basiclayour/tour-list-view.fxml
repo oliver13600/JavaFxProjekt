@@ -21,4 +21,8 @@
 
     <ListView fx:id="tours" onMouseClicked="#handleMouseClick"/>
 
+    <ScrollPane style="-fx-background-color: rgba(104,110,104,0.46); -fx-border-color: rgba(10,10,220,0.51);" prefHeight="150" hbarPolicy="ALWAYS">
+        <Label fx:id="tourDetails" style="-fx-padding: 2 2 2 2" text="TourInformation: "></Label>
+    </ScrollPane>
+
 </VBox>

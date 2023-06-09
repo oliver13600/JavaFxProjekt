@@ -71,11 +71,8 @@ public class TourLogService {
         String ratingString = tourLogInforSplit[7];
         String ratingStringSplit[] = ratingString.split(" ");
 
-        System.out.println(dateTime
-                + " " + commentStringSplit[0] + " " +difficultyInteger + difficultyInteger
-                + " " + totalTime + " " + ratingStringSplit[0]);
-
-        logger.info("Selected Tour: " + selectedTour);
+        logger.info("Selected Tour: " + selectedTour + " at: " + dateTime
+                + " difficulty: " + difficultyInteger + " totalTime: " + totalTime + " rating: " + ratingStringSplit[0]);
 
         Tour tour = tourRepository.findTourByName(selectedTour);
 
