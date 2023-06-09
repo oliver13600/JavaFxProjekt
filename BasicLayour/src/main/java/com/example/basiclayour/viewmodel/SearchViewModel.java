@@ -6,6 +6,7 @@ import com.example.basiclayour.service.TourService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+
 public class SearchViewModel {
 
     private final StringProperty string1 = new SimpleStringProperty("");
@@ -25,6 +26,10 @@ public class SearchViewModel {
         this.searchService = searchService;
 
     }
+
+
+
+
 
     public void searchTour()
     {

@@ -15,8 +15,9 @@ module com.example.basiclayour {
     requires kernel;
     requires layout;
     requires io;
+    requires org.controlsfx.controls;
 
-    opens com.example.basiclayour.dto to com.fasterxml.jackson.databind;
+
 
     opens com.example.basiclayour.model to org.hibernate.orm.core, javafx.base;
 

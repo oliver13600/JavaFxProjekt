@@ -12,6 +12,7 @@ import com.example.basiclayour.model.Tour;
 import com.example.basiclayour.service.PropertiesFileService;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -57,15 +58,23 @@ public class TourRepository {
         }
     }
 
-    public List<Tour> findToursByKeyword(String keyword){
+    public List<Tour> findToursByKeyword(String keyword) {
         try (Session session = sessionFactory.openSession()) {
             CriteriaBuilder builder = session.getCriteriaBuilder();
             CriteriaQuery<Tour> criteria = builder.createQuery(Tour.class);
             Root<Tour> root = criteria.from(Tour.class);
             criteria.select(root);
-            criteria.where(builder.like(root.get("name"), "%" + keyword + "%"));
 
-            logger.info("Selected KeyWord for Searched Tours: " + keyword);
+            Predicate predicate = builder.or(
+                    builder.like(root.get("name"), "%" + keyword + "%"),
+                    builder.like(root.get("tourDescription"), "%" + keyword + "%"),
+                    builder.like(root.get("fromStart"), "%" + keyword + "%"),
+                    builder.like(root.get("toFinish"), "%" + keyword + "%")
+                    // Add more attributes as needed
+            );
+            criteria.where(predicate);
+
+            logger.info("Selected Keyword for Searched Tours: " + keyword);
 
             return session.createQuery(criteria).getResultList();
         }

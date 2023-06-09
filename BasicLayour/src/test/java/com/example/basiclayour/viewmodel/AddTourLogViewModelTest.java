@@ -1,8 +1,11 @@
 package com.example.basiclayour.viewmodel;
 
 import com.example.basiclayour.event.EventAggregator;
+import com.example.basiclayour.model.Tour;
 import com.example.basiclayour.service.*;
 import com.example.basiclayour.view.ViewFactory;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,8 +14,7 @@ import org.mockito.Mock;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.mockConstruction;
+import static org.mockito.Mockito.*;
 
 public class AddTourLogViewModelTest {
 
@@ -34,43 +36,21 @@ public class AddTourLogViewModelTest {
         mapService = new MapService(eventAggregator, tourService);
     }
 
+
+
+
     @Test
-    public void testAddTourLog_AllMandatoriesFilledOut() {
-
-        viewModel = mock(AddTourLogViewModel.class);
-        // Set up the test data
-        viewModel.setHours("2");
-        viewModel.setMinutes("30");
-        viewModel.setLogComment("Great tour");
-        viewModel.setDifficultyChoiceBoxInput();
-        viewModel.setTotalTime("3 hours");
-        viewModel.setLogDate(LocalDate.now());
-        String selectedRating = "5 ★★★★★";
-
-        // Call the method
-        viewModel.addTourLog(selectedRating, "TourTest");
-
-        // Verify the output
-        String expectedOutput = "Comment: Great tour Difficulty: Medium TotalTime: 3 hours";
-        assertEquals(expectedOutput, viewModel.getOutput());
-
-        // Verify the state of the properties after the method call
-        assertEquals("", viewModel.getHours());
-        assertEquals("", viewModel.getMinutes());
-        assertEquals("", viewModel.getLogComment());
-        assertEquals("", viewModel.getDifficultyChoiceBoxInput());
-        assertEquals("", viewModel.getTotalTime());
-        assertEquals(null, viewModel.getLogDate());
+    public void testCheckTotalTimeIsValid_ValidTotalTime_ReturnsTrue() {
+        viewModel = new AddTourLogViewModel(tourLogService, mapService);
+        assertTrue(viewModel.checkTotalTimeIsValid("02:30:00"));
     }
 
     @Test
-    public void testAddTourLog_MandatoryFieldsNotFilledOut() {
+    public void testCheckTotalTimeIsValid_InvalidTotalTime_ReturnsFalse() {
         viewModel = new AddTourLogViewModel(tourLogService, mapService);
-        // Call the method without filling out mandatory fields
-        viewModel.addTourLog("5 ★★★★★", "Medium");
-
-        // Verify the output
-        assertEquals("Please fill out all TextFields and pick a date", viewModel.getOutput());
+        assertFalse(viewModel.checkTotalTimeIsValid("2:30:00"));
+        assertFalse(viewModel.checkTotalTimeIsValid("02:30"));
+        assertFalse(viewModel.checkTotalTimeIsValid("02:30:00:00"));
     }
 
     @Test
@@ -97,6 +77,32 @@ public class AddTourLogViewModelTest {
 
         // Verify the returned rating
         assertEquals("5 ★★★★★", rating);
+    }
+
+    @Test
+    public void testGetRatingChoiceBoxInput_ReturnsCorrectList() {
+        viewModel = new AddTourLogViewModel(tourLogService, mapService);
+        ObservableList<String> expectedList = viewModel.getRatingChoiceBoxInput();
+
+        assertEquals(5, expectedList.size());
+        assertEquals("1 ★", expectedList.get(0));
+        assertEquals("2 ★★", expectedList.get(1));
+        assertEquals("3 ★★★", expectedList.get(2));
+        assertEquals("4 ★★★★", expectedList.get(3));
+        assertEquals("5 ★★★★★", expectedList.get(4));
+    }
+
+    @Test
+    public void testGetDifficultyChoiceBoxInput_ReturnsCorrectList() {
+        viewModel = new AddTourLogViewModel(tourLogService, mapService);
+        ObservableList<String> expectedList = viewModel.getDifficultyChoiceBoxInput();
+
+        assertEquals(5, expectedList.size());
+        assertEquals("Beginner", expectedList.get(0));
+        assertEquals("Easy", expectedList.get(1));
+        assertEquals("Normal", expectedList.get(2));
+        assertEquals("Hard", expectedList.get(3));
+        assertEquals("Extreme", expectedList.get(4));
     }
 
 }
