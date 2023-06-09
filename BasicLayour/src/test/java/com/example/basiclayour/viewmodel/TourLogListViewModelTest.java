@@ -2,6 +2,7 @@ package com.example.basiclayour.viewmodel;
 
 import com.example.basiclayour.event.EventAggregator;
 import com.example.basiclayour.model.TourLog;
+import com.example.basiclayour.service.MapService;
 import com.example.basiclayour.service.TourLogService;
 import javafx.collections.ObservableList;
 import org.junit.Before;
@@ -9,8 +10,13 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class TourLogListViewModelTest {
     @Mock
@@ -19,29 +25,35 @@ public class TourLogListViewModelTest {
     @Mock
     private TourLogService tourLogService;
 
+    @Mock
+    private MapService mapService;
+
     private TourLogListViewModel viewModel;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
-        viewModel = new TourLogListViewModel(eventAggregator, tourLogService);
-    }
-
-    @Test
-    public void testGetLogs_ReturnsTourLogs() {
-        ObservableList<String> expectedLogs = viewModel.getLogs();
-
-        assertEquals(0, expectedLogs.size());
+        MockitoAnnotations.openMocks(this);
+        viewModel = new TourLogListViewModel(eventAggregator, tourLogService, mapService);
     }
 
 
+
     @Test
-    public void testDeleteTourLog_PrintsTourDeleted() {
-        String selectedTourLog = "tour_log_id";
+    public void testSetDefaultValue() {
+        // Act
+        viewModel.setDefaultValue();
 
-        viewModel.deleteTourLog(selectedTourLog);
+        // Assert
+        assertEquals(Collections.singletonList("No Tours selected - so no TourLogs to display"), viewModel.getTourLogs());
+    }
 
-        // Use any verification mechanism to ensure that "Tour deleted..." was printed
+    @Test
+    public void testDeleteTourLog() {
+        // Act
+        viewModel.deleteTourLog("SelectedTourLog");
+
+        // Assert
+        // You can add assertions here based on the expected behavior of the deleteTourLog() method
     }
 
 
