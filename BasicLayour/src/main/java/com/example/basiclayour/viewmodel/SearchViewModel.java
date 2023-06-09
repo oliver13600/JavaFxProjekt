@@ -6,6 +6,8 @@ import com.example.basiclayour.service.TourService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.util.List;
+
 
 public class SearchViewModel {
 
@@ -36,6 +38,18 @@ public class SearchViewModel {
         String keyword = string1.getValue();
         searchService.setKeyword(keyword);
         searchService.searchTours();
+    }
+
+    public void searchSuggestions()
+    {
+        String keyword = string1.getValue();
+        searchService.setKeyword(keyword);
+        searchService.findToursByKeyword();
+    }
+
+    public List<String> getSuggestions(String keyword){
+        searchService.setKeyword(keyword);
+        return searchService.findToursByKeyword();
     }
 
     public String getString1() {

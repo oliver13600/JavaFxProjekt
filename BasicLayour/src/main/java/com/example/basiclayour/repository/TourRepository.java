@@ -56,19 +56,21 @@ public class TourRepository {
         }
     }
 
-    public List<Tour> findToursByKeyword(String keyword){
+    public List<Tour> findToursByKeyword(String keyword) {
         try (Session session = sessionFactory.openSession()) {
             CriteriaBuilder builder = session.getCriteriaBuilder();
             CriteriaQuery<Tour> criteria = builder.createQuery(Tour.class);
             Root<Tour> root = criteria.from(Tour.class);
             criteria.select(root);
-            criteria.where(builder.like(root.get("name"), "%" + keyword + "%"));
+            criteria.where(builder.like(builder.lower(root.get("tourInformation")), "%" + keyword.toLowerCase() + "%"));
 
-            logger.info("Selected KeyWord for Searched Tours: " + keyword);
+            logger.info("Selected Keyword for Searched Tours: " + keyword);
 
             return session.createQuery(criteria).getResultList();
         }
     }
+
+
 
     public Tour getTour(String keyword) {
         try (Session session = sessionFactory.openSession()) {
@@ -118,6 +120,7 @@ public class TourRepository {
     public void searchTours(){
         eventAggregator.publish(Event.SEARCH_TOUR);
     }
+
 
 
     public void deleteTourByKeyword(String keyword) {
