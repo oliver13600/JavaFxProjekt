@@ -52,6 +52,10 @@ public class TourService {
                 .collect(Collectors.toList());
     }
 
+    public List<Tour> getAllTours(){
+        return tourRepository.findAll();
+    }
+
     public Tour getTourInformation(String keyword){
         return tourRepository.getTour(keyword);
     }

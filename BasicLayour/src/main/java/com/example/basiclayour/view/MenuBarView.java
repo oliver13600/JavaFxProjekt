@@ -13,4 +13,7 @@ public class MenuBarView {
 
     @FXML
     void tourReport(){menuBarViewModel.generatePdf();}
+
+    @FXML
+    void summarizeReport(){menuBarViewModel.generateSummarizeReport();}
 }

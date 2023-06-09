@@ -17,7 +17,7 @@
                 <Menu text="Export">
                     <items>
                         <MenuItem mnemonicParsing="false" text="tour-report" onAction="#tourReport"/>
-                        <MenuItem mnemonicParsing="false" text="summarize-report" />
+                        <MenuItem mnemonicParsing="false" text="summarize-report" onAction="#summarizeReport" />
                     </items>
 
                 </Menu>

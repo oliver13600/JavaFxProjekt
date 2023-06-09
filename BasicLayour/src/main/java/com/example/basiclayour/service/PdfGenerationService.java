@@ -8,7 +8,7 @@ public interface PdfGenerationService {
     void tourReport() throws IOException;
 
     // summarize report => average time // average distance // rating over all associated tour logs
-    void summarizeReport();
+    void summarizeReport() throws IOException;
 
     public void setTourToPdf(String test);
 }
