@@ -9,11 +9,16 @@ import java.util.List;
 
 import com.example.basiclayour.data.HibernateSessionFactory;
 import com.example.basiclayour.model.Tour;
+import com.example.basiclayour.model.TourLog;
 import com.example.basiclayour.service.PropertiesFileService;
+<<<<<<< HEAD
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
+=======
+import jakarta.persistence.criteria.*;
+>>>>>>> 8bdcde390c0f39923c4a77c6d58da56333123499
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Hibernate;
@@ -131,6 +136,28 @@ public class TourRepository {
 
 
     public void deleteTourByKeyword(String keyword) {
+
+        try (Session session = sessionFactory.openSession()) {
+            CriteriaBuilder builder = session.getCriteriaBuilder();
+            CriteriaDelete<TourLog> delete = builder.createCriteriaDelete(TourLog.class);
+            Root<TourLog> root = delete.from(TourLog.class);
+
+            Subquery<Tour> subquery = delete.subquery(Tour.class);
+            Root<Tour> subqueryRoot = subquery.from(Tour.class);
+            subquery.select(subqueryRoot);
+            subquery.where(builder.equal(subqueryRoot.get("name"), keyword));
+
+            delete.where(builder.in(root.get("tour")).value(subquery));
+
+            Transaction transaction = session.beginTransaction();
+            int deletedCount = session.createQuery(delete).executeUpdate();
+            transaction.commit();
+
+            logger.info("Deleted " + deletedCount + " TourLog items.");
+        } catch (Exception e) {
+            logger.error("Cannot delete Logs from Tour: " + keyword + " " + e);
+        }
+
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
 
