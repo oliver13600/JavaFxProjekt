@@ -8,6 +8,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -108,6 +109,19 @@ public class TourLogService {
                 .stream()
                 .map(TourLog::getTourLogInformation)
                 .collect(Collectors.toList());
+    }
+
+    public void deleteTourLogBySelectedTourLog(String tourLog, String fromTour){
+
+        String tourLogString[] = tourLog.split("\\|");
+        String localDateTimeString = tourLogString[0].substring(0, tourLogString[0].length()-1); // cut away last whitespace
+
+        String pattern = "yyyy-MM-dd'T'HH:mm";
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        LocalDateTime dateTime = LocalDateTime.parse(localDateTimeString, formatter);
+
+        tourLogRepository.deleteTourLogByKeyword(dateTime, fromTour);
     }
 
 

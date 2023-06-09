@@ -12,7 +12,10 @@ import jakarta.persistence.criteria.Root;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class TourLogRepository {
@@ -50,11 +53,40 @@ public class TourLogRepository {
             criteria.select(root);
             criteria.where(builder.like(tourJoin.get("name"), "%" + selectedTour + "%"));
 
-            logger.info("Logs from Tour: " + selectedTour + "added");
+            logger.info("Logs from Tour: " + selectedTour + " added");
 
             return session.createQuery(criteria).getResultList();
         }
     }
 
+    public void deleteTourLogByKeyword(LocalDateTime dateTime, String fromTour) {
+
+        try (Session session = sessionFactory.openSession()) {
+            Transaction transaction = session.beginTransaction();
+
+            Query<Tour> tourQuery = session.createQuery("FROM Tour WHERE name = :fromTour", Tour.class);
+            tourQuery.setParameter("fromTour",  fromTour);
+            Tour tour = tourQuery.uniqueResult();
+
+            if (tour != null) {
+                // Delete all associated tour logs
+                List<TourLog> tourLogs = tour.getTourLogs();
+                for (TourLog tourLog : tourLogs) {
+                    if (tourLog.getDateTime().equals(dateTime)) {
+                        tourLogs.remove(tourLog);
+                        tour.setTourLogs(tourLogs); // Updates the tourLogs association in Tour entity with the modified list
+                        session.saveOrUpdate(tour); // saves or updates the Tour entity to reflect the modified association
+                        session.delete(tourLog);
+                        break; // To only delete one TourLog
+                    }
+               }
+            }
+            transaction.commit();
+
+            logger.info("Log with LocalDateTime:  " + dateTime + " deleted from Tour: " + fromTour);
+
+            eventAggregator.publish(Event.DELETE_LOG);
+        }
+    }
 
 }

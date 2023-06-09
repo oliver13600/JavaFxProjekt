@@ -5,6 +5,8 @@ import com.example.basiclayour.event.EventAggregator;
 import com.example.basiclayour.service.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.boot.model.source.spi.MapsIdSource;
 
 import java.util.Map;
@@ -12,9 +14,10 @@ import java.util.Map;
 
 public class TourLogListViewModel {
     private final ObservableList<String> tourLogs = FXCollections.observableArrayList();
+
+    private static final Logger logger = LogManager.getLogger(TourLogListViewModel.class);
     private final EventAggregator eventAggregator;
     private final TourLogService tourLogService;
-
     private final MapService mapService;
 
     public TourLogListViewModel(
@@ -82,7 +85,15 @@ public class TourLogListViewModel {
     }
 
     public void deleteTourLog(String selectedTourLog){
-        System.out.println("Tour deleted...");
+        if(!selectedTourLog.equals("No TourLogs found") && !selectedTourLog.equals("No Tours selected - so no TourLogs to display")){
+            if(mapService.getTmpSelectedItem() != null){
+                tourLogService.deleteTourLogBySelectedTourLog(selectedTourLog, mapService.getTmpSelectedItem());
+                logger.info("Deleted Log " + selectedTourLog);
+            }
+
+         } else {
+            logger.info("Tour not deleted because no log to delete");
+        }
     }
 
 
