@@ -4,8 +4,6 @@ import com.example.basiclayour.viewmodel.SearchViewModel;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import org.controlsfx.control.textfield.AutoCompletionBinding;
-import org.controlsfx.control.textfield.TextFields;
 
 public class SearchView {
     @FXML

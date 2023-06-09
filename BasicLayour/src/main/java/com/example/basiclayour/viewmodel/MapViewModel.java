@@ -7,14 +7,16 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 
 public class MapViewModel {
-    //private final ObjectProperty<ImageView> imageView = new SimpleObjectProperty<ImageView>();
     private final ObjectProperty<Image> mapImage = new SimpleObjectProperty<Image>();
     private final MapService mapService;
     private  final EventAggregator eventAggregator;
+    private static final Logger logger = LogManager.getLogger(MapViewModel.class);
 
     public MapViewModel(MapService mapService, EventAggregator eventAggregator){
         this.mapService = mapService;
@@ -44,21 +46,33 @@ public class MapViewModel {
         } else {
             Image image = new Image("file:mapCollection/mapError.png");
             mapImage.set(image);
-            System.out.println("No file found for display");
-            //throw new RuntimeException("File does not exist");
+            logger.error("No file found for display - fileNotFound");
         }
     }
 
     public void deleteImage(){
         String imagePath = mapService.getImagePath();
-        String filePath[] = imagePath.split(":");
-        File file = new File(filePath[1]);
+        boolean imageMatchFound;
 
-        if(file.exists()){
-            file.delete();
+        // check if image is used by other Tours
+        String mapStringToCheck[] = imagePath.split("/");
+        String mapStringToCheckSplit[] = mapStringToCheck[1].split("\\.");
+
+        imageMatchFound = mapService.checkIfImageUsedByOtherTour(mapStringToCheckSplit[0]);
+
+        if(imageMatchFound == false) {
+            String filePath[] = imagePath.split(":");
+            File file = new File(filePath[1]);
+
+            if (file.exists()) {
+                file.delete();
+            } else {
+                logger.error("File could not be deleted because it does not exist");
+            }
         } else {
-            System.out.println("File could not be deleted because it does not exist");
+            logger.info("File was not deleted because it is used by other tour as well");
         }
+
     }
 
     public void setDefaultImage(){

@@ -11,14 +11,7 @@ import com.example.basiclayour.data.HibernateSessionFactory;
 import com.example.basiclayour.model.Tour;
 import com.example.basiclayour.model.TourLog;
 import com.example.basiclayour.service.PropertiesFileService;
-<<<<<<< HEAD
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
-=======
 import jakarta.persistence.criteria.*;
->>>>>>> 8bdcde390c0f39923c4a77c6d58da56333123499
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.hibernate.Hibernate;
@@ -63,23 +56,15 @@ public class TourRepository {
         }
     }
 
-    public List<Tour> findToursByKeyword(String keyword) {
+    public List<Tour> findToursByKeyword(String keyword){
         try (Session session = sessionFactory.openSession()) {
             CriteriaBuilder builder = session.getCriteriaBuilder();
             CriteriaQuery<Tour> criteria = builder.createQuery(Tour.class);
             Root<Tour> root = criteria.from(Tour.class);
             criteria.select(root);
+            criteria.where(builder.like(root.get("name"), "%" + keyword + "%"));
 
-            Predicate predicate = builder.or(
-                    builder.like(root.get("name"), "%" + keyword + "%"),
-                    builder.like(root.get("tourDescription"), "%" + keyword + "%"),
-                    builder.like(root.get("fromStart"), "%" + keyword + "%"),
-                    builder.like(root.get("toFinish"), "%" + keyword + "%")
-                    // Add more attributes as needed
-            );
-            criteria.where(predicate);
-
-            logger.info("Selected Keyword for Searched Tours: " + keyword);
+            logger.info("Selected KeyWord for Searched Tours: " + keyword);
 
             return session.createQuery(criteria).getResultList();
         }
@@ -138,39 +123,43 @@ public class TourRepository {
     public void deleteTourByKeyword(String keyword) {
 
         try (Session session = sessionFactory.openSession()) {
-            CriteriaBuilder builder = session.getCriteriaBuilder();
-            CriteriaDelete<TourLog> delete = builder.createCriteriaDelete(TourLog.class);
-            Root<TourLog> root = delete.from(TourLog.class);
-
-            Subquery<Tour> subquery = delete.subquery(Tour.class);
-            Root<Tour> subqueryRoot = subquery.from(Tour.class);
-            subquery.select(subqueryRoot);
-            subquery.where(builder.equal(subqueryRoot.get("name"), keyword));
-
-            delete.where(builder.in(root.get("tour")).value(subquery));
-
             Transaction transaction = session.beginTransaction();
-            int deletedCount = session.createQuery(delete).executeUpdate();
+
+            Query<Tour> tourQuery = session.createQuery("FROM Tour WHERE name = :keyword", Tour.class);
+            tourQuery.setParameter("keyword",  keyword);
+            Tour tour = tourQuery.uniqueResult();
+
+            if (tour != null) {
+                // Delete all associated tour logs
+                List<TourLog> tourLogs = tour.getTourLogs();
+                for (TourLog tourLog : tourLogs) {
+                    session.delete(tourLog);
+                }
+
+                // Clear the association between tour and tour logs
+                tourLogs.clear();
+
+                // Delete the tour itself
+                session.delete(tour);
+            }
             transaction.commit();
 
-            logger.info("Deleted " + deletedCount + " TourLog items.");
-        } catch (Exception e) {
-            logger.error("Cannot delete Logs from Tour: " + keyword + " " + e);
-        }
+            logger.info("Tour:  " + keyword + " + all of its TourLogs deleted.");
 
+            eventAggregator.publish(Event.DELETE_TOUR);
+        }
+    }
+
+    public int getMatchesInTourDescription(String searchTerm){
         try (Session session = sessionFactory.openSession()) {
-            Transaction transaction = session.beginTransaction();
+            Query<Long> countQuery = session.createQuery("SELECT COUNT(*) FROM Tour WHERE tourDescription LIKE :searchTerm");
+            countQuery.setParameter("searchTerm", "%" + searchTerm + "%");
+            Long count = countQuery.uniqueResult();
 
-            Query<Tour> query = session.createQuery("DELETE FROM Tour WHERE name = :keyword");
-            query.setParameter("keyword", keyword);
-            query.executeUpdate();
+            logger.info("TourDescription: "+ searchTerm + "found " + count + " matches in the database");
 
-            transaction.commit();
-
-            logger.info("Tour deleted where name: " + keyword);
+            return count.intValue();
         }
-
-        eventAggregator.publish(Event.DELETE_TOUR);
     }
 
 }

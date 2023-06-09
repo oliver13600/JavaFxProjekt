@@ -67,4 +67,8 @@ public class TourService {
         tourRepository.deleteTourByKeyword(keyword);
     }
 
+    public int getAmountOfMatches(String tourDescription){
+        return tourRepository.getMatchesInTourDescription(tourDescription);
+    }
+
 }

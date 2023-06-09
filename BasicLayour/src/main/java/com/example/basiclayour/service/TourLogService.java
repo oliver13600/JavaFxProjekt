@@ -4,7 +4,8 @@ import com.example.basiclayour.model.Tour;
 import com.example.basiclayour.model.TourLog;
 import com.example.basiclayour.repository.TourLogRepository;
 import com.example.basiclayour.repository.TourRepository;
-import jakarta.persistence.criteria.CriteriaBuilder;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,6 +15,7 @@ public class TourLogService {
 
     private final TourLogRepository tourLogRepository;
     private final TourRepository tourRepository;
+    private static final Logger logger = LogManager.getLogger(TourLogService.class);
 
     public TourLogService(TourLogRepository tourLogRepository, TourRepository tourRepository){
         this.tourLogRepository = tourLogRepository;
@@ -69,16 +71,18 @@ public class TourLogService {
         String ratingStringSplit[] = ratingString.split(" ");
 
         System.out.println(dateTime
-        + " " + commentStringSplit[0] + " " +difficultyInteger + difficultyInteger
+                + " " + commentStringSplit[0] + " " +difficultyInteger + difficultyInteger
                 + " " + totalTime + " " + ratingStringSplit[0]);
 
-        System.out.println(" SELECTED TOUR NAME: " + selectedTour);
+        logger.info("Selected Tour: " + selectedTour);
 
         Tour tour = tourRepository.findTourByName(selectedTour);
 
         // LocalDateTime dateTime, Integer difficulty, float totalTime, int rating, Tour tour
         if(tour != null){
             tourLogRepository.save(new TourLog(dateTime, commentStringSplit[0] ,difficultyInteger, totalTime, Integer.parseInt(ratingStringSplit[0]), tour));
+        } else {
+            logger.error("Selected Tour was null" + selectedTour);
         }
     }
 
@@ -97,6 +101,13 @@ public class TourLogService {
             default:
                 return 0;
         }
+    }
+
+    public List<String> findAllLogs(String selectedTour) {
+        return tourLogRepository.findAllLogsToTour(selectedTour)
+                .stream()
+                .map(TourLog::getTourLogInformation)
+                .collect(Collectors.toList());
     }
 
 

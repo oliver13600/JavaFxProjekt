@@ -6,5 +6,6 @@ public enum Event {
     DELETE_TOUR,
     SEARCH_TOUR,
     SELECTED_TOUR,
-    NEW_LOG
+    NEW_LOG,
+    DELETE_LOG
 }

@@ -62,7 +62,7 @@ public class ViewFactory {
         addTourLogViewModel = new AddTourLogViewModel(tourLogService, mapService);
         searchViewModel = new SearchViewModel(tourService, searchService);
         tourListViewModel = new TourListViewModel(eventAggregator, tourService, mapService, searchService, pdfGenerationService);
-        tourLogListViewModel = new TourLogListViewModel(eventAggregator, tourLogService);
+        tourLogListViewModel = new TourLogListViewModel(eventAggregator, tourLogService, mapService);
     }
 
     public Object create(Class<?> viewClass) {

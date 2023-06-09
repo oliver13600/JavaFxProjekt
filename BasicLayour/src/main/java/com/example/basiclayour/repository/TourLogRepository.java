@@ -41,24 +41,16 @@ public class TourLogRepository {
         eventAggregator.publish(Event.NEW_LOG);
     }
 
-    public List<TourLog> findTourLogsByTour(String tourName) {
+    public List<TourLog> findAllLogsToTour(String selectedTour) {
         try (Session session = sessionFactory.openSession()) {
             CriteriaBuilder builder = session.getCriteriaBuilder();
             CriteriaQuery<TourLog> criteria = builder.createQuery(TourLog.class);
             Root<TourLog> root = criteria.from(TourLog.class);
             Join<TourLog, Tour> tourJoin = root.join("tour");
             criteria.select(root);
-            criteria.where(builder.like(tourJoin.get("name"), "%" + tourName + "%"));
+            criteria.where(builder.like(tourJoin.get("name"), "%" + selectedTour + "%"));
 
-            return session.createQuery(criteria).getResultList();
-        }
-    }
-
-    public List<TourLog> findAll() {
-        try (Session session = sessionFactory.openSession()) {
-            CriteriaBuilder builder = session.getCriteriaBuilder();
-            CriteriaQuery<TourLog> criteria = builder.createQuery(TourLog.class);
-            criteria.from(TourLog.class);
+            logger.info("Logs from Tour: " + selectedTour + "added");
 
             return session.createQuery(criteria).getResultList();
         }
