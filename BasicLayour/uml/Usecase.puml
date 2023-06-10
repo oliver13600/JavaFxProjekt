@@ -1,0 +1,22 @@
+@startuml
+left to right direction
+actor "User" as u
+rectangle "Tour App" {
+usecase "Add Tours" as UC1
+usecase "Add Tour Logs" as UC3
+usecase "Export to PDF" as UC2
+usecase "Delete Tours" as UC4
+usecase "Delete Tour Logs" as UC5
+usecase "Search Tours" as UC6
+usecase "Export summary to PDF" as UC7
+
+
+}
+u -- UC1
+u -- UC2
+u -- UC3
+u -- UC4
+u -- UC5
+u -- UC6
+u -- UC7
+@enduml

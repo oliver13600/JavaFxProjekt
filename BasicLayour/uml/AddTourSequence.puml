@@ -1,0 +1,14 @@
+@startuml
+
+
+TourPlaner -> TourService: AddTour()
+TourService-> TourRepository : save()
+TourRepository -> TourService: returnAllTours()
+
+TourService-> TourService: findAll()
+
+
+
+TourService--> TourPlaner:listAll()
+
+@enduml

@@ -1,0 +1,16 @@
+@startuml
+
+
+TourPlaner -> MenuBarView
+MenuBarView -> MenuBarViewModel : summarizeReport()
+MenuBarViewModel -> iTextPdfGenerationService : generateSummarizeReport()
+iTextPdfGenerationService -> TourService : getAllTours()
+TourService -> TourRepository : findAll()
+TourRepository --> iTextPdfGenerationService
+iTextPdfGenerationService -> iTextPdfGenerationService : checkIfTourNotNull()
+iTextPdfGenerationService -> iTextPdfGenerationService : createsPdf()
+
+iTextPdfGenerationService --> TourPlaner
+
+@enduml
+
