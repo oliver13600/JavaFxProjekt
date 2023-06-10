@@ -1,14 +1,20 @@
 @startuml
 
 
-TourPlaner -> TourService: AddTour()
+TourPlaner -> AddTourView : addTour()
+AddTourView -> AddTourViewModel : addTour()
+AddTourViewModel -> TourService: save()
 TourService-> TourRepository : save()
 TourRepository -> TourService: returnAllTours()
+TourRepository -> TourRepository : publishEvent(NewTour)
 
-TourService-> TourService: findAll()
-
-
-
-TourService--> TourPlaner:listAll()
+TourListViewModel -> TourListViewModel : eventAggregator(onNewTour)
+TourListViewModel -> TourService : onNewTour()
+TourService-> TourRepository: findAll()
+TourRepository -> TourRepository : findAll()
+TourRepository --> TourService
+TourService --> TourListViewModel
+TourListViewModel --> TourListView
+TourListView --> TourPlaner
 
 @enduml
