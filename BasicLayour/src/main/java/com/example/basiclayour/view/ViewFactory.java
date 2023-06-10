@@ -13,6 +13,7 @@ import com.example.basiclayour.repository.TourRepository;
 import com.example.basiclayour.service.*;
 import com.example.basiclayour.viewmodel.*;
 
+import java.util.Properties;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
@@ -91,7 +92,7 @@ public class ViewFactory {
             return new TourLogListView(tourLogListViewModel);
         }
 
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException("Error fetching Class in ViewFactory");
     }
 
     public static ViewFactory getInstance() {

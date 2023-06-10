@@ -56,8 +56,7 @@ public class MapQuestRouteService implements RouteService{
 
             if (response.statusCode() >= 400) { // 500 = internal server error
                 // handle error
-
-                throw new RuntimeException("MapQuestApi not repsonding...");
+                logger.error("MapquestApi not responding => StatusCode: " + response.statusCode());
             }
 
         } catch (URISyntaxException e) {
